@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://actor/constuction/Barrack.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 35.26
+
+[node name="barrack" type="StaticBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="icon" type="Sprite" parent="."]
+self_modulate = Color( 1, 0, 0, 1 )
+texture = ExtResource( 2 )
+
+[node name="spawnList" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="1" type="Position2D" parent="spawnList"]
+position = Vector2( -21.3268, -50.5108 )
+
+[node name="2" type="Position2D" parent="spawnList"]
+position = Vector2( 21.888, -51.072 )
+
+[node name="3" type="Position2D" parent="spawnList"]
+position = Vector2( 53.8782, -20.2043 )
+
+[node name="4" type="Position2D" parent="spawnList"]
+position = Vector2( 53.8782, 20.7655 )
+
+[node name="5" type="Position2D" parent="spawnList"]
+position = Vector2( 20.2043, 53.3169 )
+
+[node name="6" type="Position2D" parent="spawnList"]
+position = Vector2( -20.2043, 53.8782 )
+
+[node name="7" type="Position2D" parent="spawnList"]
+position = Vector2( -56.6844, 20.7656 )
+
+[node name="8" type="Position2D" parent="spawnList"]
+position = Vector2( -56.6844, -20.2043 )
+
+[node name="trainingProgress" type="ProgressBar" parent="."]
+visible = false
+margin_left = -32.0
+margin_top = 19.0
+margin_right = 32.0
+margin_bottom = 33.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://actor/object/battle_field/MinePoint.tscn" type="PackedScene" id=1]
+
+[node name="World" type="Node2D"]
+
+[node name="mine_points" type="Node" parent="."]
+
+[node name="minePoint" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 245.684, 137.331 )
+
+[node name="minePoint2" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 880.684, 325.059 )
+
+[node name="minePoint3" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 95.754, 311.2 )
+
+[node name="minePoint4" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 679.097, 57.9564 )
+
+[node name="minePoint5" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 411.994, 516.567 )
+
+[node name="minePoint6" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 583.343, 326.319 )
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="0" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 64, 51 )
+
+[node name="1" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 65, 531 )
+
+[node name="2" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 938, 536 )
+
+[node name="3" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 941, 71 )
+
+[node name="kingdoms" type="Node2D" parent="."]

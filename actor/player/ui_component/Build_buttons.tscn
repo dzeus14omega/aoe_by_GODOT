@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://actor/player/ui_component/Build_buttons.gd" type="Script" id=2]
+
+[node name="build_buttons" type="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -88.0
+margin_top = 256.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -296.0
+margin_bottom = 48.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="listButton" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -280.0
+margin_right = -8.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buildGoldMine" type="TextureButton" parent="listButton"]
+modulate = Color( 0.388235, 0.443137, 0.866667, 1 )
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 1 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buildBarrack" type="TextureButton" parent="listButton"]
+modulate = Color( 1, 0, 0, 1 )
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture_normal = ExtResource( 1 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buildTower" type="TextureButton" parent="listButton"]
+modulate = Color( 0.00784314, 1, 0, 1 )
+margin_top = 136.0
+margin_right = 64.0
+margin_bottom = 200.0
+texture_normal = ExtResource( 1 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buildWall" type="TextureButton" parent="listButton"]
+margin_top = 204.0
+margin_right = 64.0
+margin_bottom = 268.0
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="listButton/buildGoldMine" to="." method="_on_buildGoldMine_button_up"]
+[connection signal="button_up" from="listButton/buildBarrack" to="." method="_on_buildBarrack_button_up"]
+[connection signal="button_up" from="listButton/buildTower" to="." method="_on_buildTower_button_up"]
+[connection signal="button_up" from="listButton/buildWall" to="." method="_on_buildWall_button_up"]

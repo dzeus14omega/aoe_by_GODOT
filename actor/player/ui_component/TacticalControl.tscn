@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://actor/player/ui_component/TacticalControl.gd" type="Script" id=1]
+
+[node name="tacticalControl" type="Control"]
+anchor_right = 1.0
+margin_left = -1.0
+margin_top = -2.0
+margin_right = -209.0
+margin_bottom = 153.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HScrollBar" type="ScrollContainer" parent="."]
+margin_left = 18.0
+margin_top = 22.0
+margin_right = 735.0
+margin_bottom = 142.0
+scroll_vertical_enabled = false
+scroll_deadzone = -20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="listButton" type="HBoxContainer" parent="HScrollBar"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
