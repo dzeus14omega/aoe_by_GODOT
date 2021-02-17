@@ -1,34 +1,41 @@
 class_name King extends KinematicBody2D
 
-
+#UI control
 var joystick_move
 var speed = 150
 var rotationSpeed = 100
-var _minePoint : int
+var _minePoint
 
-
+#Preload var
 var ui = preload("res://actor/player/UI.tscn")
-var _wall = preload("res://actor/constuction/Wall.tscn")
-var _goldmine = preload("res://actor/constuction/GoldMiner.tscn")
-var _barrack = preload("res://actor/constuction/Barrack.tscn")
-var _tower = preload("res://actor/constuction/Tower.tscn")
 
+var _wall = preload("res://actor/constuction/Wall.tscn").instance()
+var _goldmine = preload("res://actor/constuction/GoldMiner.tscn").instance()
+var _barrack = preload("res://actor/constuction/Barrack.tscn").instance()
+var _tower = preload("res://actor/constuction/Tower.tscn").instance()
 
-var TIME_BUILD_GOLDMINE = 8
-var TIME_BUILD_TOWER = 4
-var TIME_BUILD_BARRACK = 8
-var TIME_BUILD_WALL = 5
+#time build
+#var TIME_BUILD_GOLDMINE = 8
+#var TIME_BUILD_TOWER = 4
+#var TIME_BUILD_BARRACK = 8
+#var TIME_BUILD_WALL = 5
 
+#puppet control
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 puppet var puppet_rotation = 0
+
 var current_anim = ""
 
 var outFit 
 
+#build control
 var _tmpPosBuilding := Vector2(0,0)
-var _curBuildConstruction: Construction
+var _curBuildType : int
 
+## barrack manage var
+var MAX_BARRACKCOUNT = 7
+var cur_barrack_id = 0
 
 func _ready():
 	puppet_pos = position
@@ -107,67 +114,105 @@ func _isBuildWallAvailable():
 		return true
 	return false
 
-sync func setup_wall(pos, rot):
-	_curBuildConstruction.position = pos
-	_curBuildConstruction.rotation = rot
-	get_node("../Construction").add_child(_curBuildConstruction)
-	_curBuildConstruction = null
-	pass
+#sync func setup_wall(pos, rot):
+#	_curBuildConstruction.position = pos
+#	_curBuildConstruction.rotation = rot
+#	get_node("../Construction").add_child(_curBuildConstruction)
+#	_curBuildConstruction = null
+#	pass
+#
+#sync func setup_Construction(pos):
+#	_curBuildConstruction.position = pos
+#	get_node("../Construction").add_child(_curBuildConstruction)
+#	_minePoint.set_contruction(_curBuildConstruction)
+#	_curBuildConstruction = null
+#
+#	pass
 
-sync func setup_Construction(pos):
-	_curBuildConstruction.position = pos
-	get_node("../Construction").add_child(_curBuildConstruction)
-	instance_from_id(_minePoint).contruction = _curBuildConstruction
-	_curBuildConstruction = null
+sync func setup_Construction(pos,rot,type):
+	var construction : Construction
+	if type == 3:
+		construction = _wall.duplicate()
+		construction.rotation = rot
+	else :
+		match type:
+			0:
+				construction = _goldmine.duplicate()
+			1:
+				construction = _barrack.duplicate()
+			2:
+				construction = _tower.duplicate()
+		
+		#set barrack id if is barrack
+		if (construction is Barrack):
+			var barrackName = "barrack " + String(cur_barrack_id)
+			construction.set_BarrackName(barrackName)
+			cur_barrack_id += 1
+		_minePoint.set_contruction(construction)
+	construction.position = pos
+	get_node("../Construction").add_child(construction)
 	
-	pass
 
 func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wall
-	if type == 3:
-		if _isBuildWallAvailable():
-			_curBuildConstruction = _wall.instance()
-			$BuildingTimer.wait_time = _curBuildConstruction.getBuildTime()
-			_on_timeBuildingUpdate($BuildingTimer.wait_time)
-			$buildProgress.visible = true
-			$BuildingTimer.start()
-			_tmpPosBuilding = self.position
-			pass
+	if is_network_master():
+		_curBuildType = type
+		if type == 3:
+			if _isBuildWallAvailable():
+				$BuildingTimer.wait_time = _wall.getBuildTime()
+				_on_timeBuildingUpdate($BuildingTimer.wait_time)
+				$buildProgress.visible = true
+				$BuildingTimer.start()
+				_tmpPosBuilding = self.position
+				pass
+			else:
+				#TODO: display wall_shadow red to warnning
+				pass
 		else:
-			#TODO: display wall_shadow red to warnning
-			pass
-	else:
-		if _minePoint != -1:
-			match type:
-				0:
-					_curBuildConstruction = _goldmine.instance()
-				1:
-					_curBuildConstruction = _barrack.instance()
-				2:
-					_curBuildConstruction = _tower.instance()
-			
-			$BuildingTimer.wait_time = _curBuildConstruction.getBuildTime()
-			_on_timeBuildingUpdate($BuildingTimer.wait_time)
-			$buildProgress.visible = true
-			$BuildingTimer.start()
-			_tmpPosBuilding = self.position
-			pass
+			if _minePoint != null:
+				#manage number of barrack count
+				var cur_barrackNum = 0;
+				for child in get_parent().get_node("Construction").get_children():
+					if child is Barrack:
+						cur_barrackNum += 1
+				if cur_barrackNum > MAX_BARRACKCOUNT - 1:
+					return
+				
+				var construction : Construction
+				
+				match type:
+					0:
+						construction = _goldmine
+					1:
+						construction = _barrack
+					2:
+						construction = _tower
+				
+				
+				$BuildingTimer.wait_time = construction.getBuildTime()
+				_on_timeBuildingUpdate($BuildingTimer.wait_time)
+				$buildProgress.visible = true
+				$BuildingTimer.start()
+				_tmpPosBuilding = self.position
+				pass
 	pass
 
 func _on_BuildingTimer_timeout():
 	if (self.position == _tmpPosBuilding):
 		#build wall
 		$buildProgress.visible = false
-		if _curBuildConstruction is Barrack:
-			_curBuildConstruction.mKing = self
-			pass
+#		if _curBuildConstruction is Barrack:
+#			_curBuildConstruction.set_mKing(self)
+#			pass
 			
-			
-		if _curBuildConstruction is Wall:
-			rpc("setup_wall", $direction/buildWallArea.global_position, $direction.global_rotation)
+#		if _curBuildConstruction is Wall:
+#			rpc("setup_wall", $direction/buildWallArea.global_position, $direction.global_rotation)
+#		else:
+#			rpc("setup_Construction", _minePoint.global_position)
+		if _curBuildType == 3:
+			rpc("setup_Construction", $direction/buildWallArea.global_position, $direction.global_rotation, _curBuildType)
 		else:
-			rpc("setup_Construction", instance_from_id(_minePoint).global_position)
-		
-#
+			rpc("setup_Construction", _minePoint.global_position, $direction.global_rotation, _curBuildType)
+		_curBuildType == -1
 #		if _curBuildConstruction is GoldMiner:
 #			pass
 #
@@ -184,20 +229,23 @@ func _on_timeBuildingUpdate(total_time):
 	pass
 
 func _on_minePoint_area_entered(area):
+#	if is_network_master():
 	if (area is MinePoint):
-		if area.contruction == null or area.contruction.get_parent().get_parent() == self.get_parent():
+		if area.construction == null or area.construction.get_parent().get_parent() == self.get_parent():
 			#print("enter mine point")
-			_minePoint = area.get_instance_id()
-			$UI.unlock_buildContruction()
+			_minePoint = area
+			if is_network_master():
+				$UI.unlock_buildContruction()
 	pass # Replace with function body.
 
 
 func _on_minePoint_area_exited(area):
+#	if is_network_master():
 	if (area is MinePoint):
-		if _minePoint != -1:
+		if _minePoint != null:
 			#print("left mine point")
-			_minePoint = -1
-			$UI.lock_buildContruction()
-		pass
+			_minePoint = null
+			if is_network_master():
+				$UI.lock_buildContruction()
 	
 	pass # Replace with function body.

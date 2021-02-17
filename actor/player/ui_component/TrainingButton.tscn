@@ -22,31 +22,51 @@ margin_right = 64.0
 margin_bottom = 14.0
 align = 1
 
-[node name="train" type="TextureButton" parent="PanelContainer"]
+[node name="changeUnit" type="Button" parent="PanelContainer"]
 margin_top = 18.0
 margin_right = 64.0
-margin_bottom = 82.0
+margin_bottom = 38.0
+text = "change"
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+margin_top = 42.0
+margin_right = 64.0
+margin_bottom = 106.0
+
+[node name="train" type="TextureButton" parent="PanelContainer/CenterContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
 texture_normal = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cost" type="Label" parent="PanelContainer/train"]
+[node name="cost" type="Label" parent="PanelContainer/CenterContainer/train"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -30.528
+margin_left = -31.0
 margin_top = -13.0
-margin_right = 30.472
-margin_bottom = 4.0
+margin_right = 33.0
+margin_bottom = 1.0
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="PanelContainer"]
-margin_top = 86.0
-margin_right = 64.0
-margin_bottom = 106.0
-text = "change"
+[node name="num" type="Label" parent="PanelContainer/CenterContainer/train"]
+anchor_left = 0.516
+anchor_top = 1.016
+anchor_right = 0.516
+anchor_bottom = 1.016
+margin_left = 15.976
+margin_top = -65.024
+margin_right = 30.976
+margin_bottom = -50.024
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="PanelContainer/changeUnit" to="." method="_on_changeUnit_button_up"]
+[connection signal="button_up" from="PanelContainer/CenterContainer/train" to="." method="_on_train_button_up"]

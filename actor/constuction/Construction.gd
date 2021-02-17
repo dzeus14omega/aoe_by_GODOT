@@ -13,6 +13,11 @@ var _cost
 func _ready():
 	pass # Replace with function body.
 
+func destruction():
+	hide()
+	get_parent().remove_child(self)
+	queue_free()
+	pass
 
 func getBuildTime():
 	return _buildTime

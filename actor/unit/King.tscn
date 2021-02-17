@@ -59,6 +59,7 @@ __meta__ = {
 
 [node name="BuildingTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 
 [node name="buildProgress" type="ProgressBar" parent="."]
 visible = false

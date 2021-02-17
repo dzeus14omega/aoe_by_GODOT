@@ -25,28 +25,28 @@ __meta__ = {
 }
 
 [node name="1" type="Position2D" parent="spawnList"]
-position = Vector2( -21.3268, -50.5108 )
+position = Vector2( -24, -56 )
 
 [node name="2" type="Position2D" parent="spawnList"]
-position = Vector2( 21.888, -51.072 )
+position = Vector2( 24, -56 )
 
 [node name="3" type="Position2D" parent="spawnList"]
-position = Vector2( 53.8782, -20.2043 )
+position = Vector2( 56, -24 )
 
 [node name="4" type="Position2D" parent="spawnList"]
-position = Vector2( 53.8782, 20.7655 )
+position = Vector2( 56, 24 )
 
 [node name="5" type="Position2D" parent="spawnList"]
-position = Vector2( 20.2043, 53.3169 )
+position = Vector2( 24, 56 )
 
 [node name="6" type="Position2D" parent="spawnList"]
-position = Vector2( -20.2043, 53.8782 )
+position = Vector2( -24, 56 )
 
 [node name="7" type="Position2D" parent="spawnList"]
-position = Vector2( -56.6844, 20.7656 )
+position = Vector2( -56.6844, 24 )
 
 [node name="8" type="Position2D" parent="spawnList"]
-position = Vector2( -56.6844, -20.2043 )
+position = Vector2( -56.6844, -24 )
 
 [node name="trainingProgress" type="ProgressBar" parent="."]
 visible = false
@@ -59,4 +59,14 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = -33.0
+margin_top = -48.0
+margin_right = 32.0
+margin_bottom = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

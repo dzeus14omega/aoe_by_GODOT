@@ -6,11 +6,15 @@ var _damage
 var _range
 var _speed
 var _trainTime
+var _cost
 
 func _ready():
 	pass # Replace with function body.
 
 func getTrainTime():
 	return  _trainTime
+
+func getCost():
+	return _cost
 
 

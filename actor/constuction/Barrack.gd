@@ -1,18 +1,22 @@
 class_name Barrack extends Construction
 
-var curUnitType : Unit
+var curUnitType : int
 var statement : int   # 0:free, 1: training
 var maxTrainAmount
 var listTraining : Array
-var mKing
+var _mKing
 
-var soldier = preload("res://actor/unit/Soldier.tscn")
-var archer = preload("res://actor/unit/Archer.tscn")
-var giant = preload("res://actor/unit/Giant.tscn")
+var soldier = preload("res://actor/unit/Soldier.tscn").instance()
+var archer = preload("res://actor/unit/Archer.tscn").instance()
+var giant = preload("res://actor/unit/Giant.tscn").instance()
 
-var trainButton = preload("res://actor/player/ui_component/TrainingButton.tscn")
+var link_trainButton
 
 func _init():
+	soldier.init()
+	archer.init()
+	giant.init()
+	
 	self._hp = 300
 	self._buildTime = 3
 	self._cost = 100
@@ -20,8 +24,10 @@ func _init():
 func _ready():
 	self.maxTrainAmount = $spawnList.get_child_count()
 	
-	if(mKing != null):
-		#mKing.get_node("UI").get_node("tacticalControl").addButtonTrain(self)
+	if(get_parent() != null):
+		_mKing = get_node("../../king")
+		if _mKing.get_node("UI") != null:
+			_mKing.get_node("UI").get_node("tacticalControl").addButtonTrain(self)
 		pass
 	#print(maxTrainAmount)
 	#trainAmry(soldier.instance())
@@ -29,25 +35,25 @@ func _ready():
 	
 	pass # Replace with function body.
 
-func trainAmry(unit : Unit):
-	if listTraining.size() <= maxTrainAmount:
+func trainAmry(unitID : int):
+	if listTraining.size() <= maxTrainAmount - 1:
 		var new_unit
-		if unit is Soldier:
-			new_unit = soldier.instance()
-		if unit is Archer:
-			new_unit = archer.instance()
-		if unit is Giant:
-			new_unit = giant.instance()
-		listTraining.append(new_unit)
+		if unitID == 0:
+			new_unit = soldier
+		if unitID == 1:
+			new_unit = archer
+		if unitID == 2:
+			new_unit = giant
+		listTraining.append(unitID)
 		
 		if listTraining.size() == 1:
-			curUnitType = unit
-			$Timer.wait_time = unit.getTrainTime()
+			#curUnitType = unit
+			$Timer.wait_time = new_unit.getTrainTime()
 			_on_timeTrainingUpdate($Timer.wait_time)
 			$trainingProgress.visible = true
 			$Timer.start()
 		if listTraining.size() > 1:
-			var new_waitTime = $Timer.time_left + unit.getTrainTime()
+			var new_waitTime = $Timer.time_left + new_unit.getTrainTime()
 			_on_timeTrainingUpdate(new_waitTime)
 			$Timer.start(new_waitTime)
 		pass
@@ -64,18 +70,29 @@ func _on_timeTrainingUpdate(total_time):
 func _on_Timer_timeout():
 	for p in $spawnList.get_children():
 		if listTraining.size() > 0:
-			var new_unit = listTraining.pop_back()
-			new_unit.position = p.global_position
-			rpc("setup_unit", new_unit)
+			print(listTraining)
+			var new_unitId = listTraining.pop_back()
+			
+#			new_unit.position = p.global_position
+			rpc("setup_unit", new_unitId, p.global_position)
 			#add_child(new_unit)
 		else:
-			$trainingProgress.visible = false
 			break
 		pass
+	$trainingProgress.visible = false
 	pass # Replace with function body.
 
-sync func setup_unit(new_unit):
-	get_node("../Army").add_child(new_unit)
+sync func setup_unit(unitID, pos):
+	#print(unit)
+	var new_unit : Unit
+	if unitID == 0:
+		new_unit = soldier.duplicate()
+	if unitID == 1:
+		new_unit = archer.duplicate()
+	if unitID == 2:
+		new_unit = giant.duplicate()
+	new_unit.position = pos
+	get_node("../../Army").add_child(new_unit)
 	pass
 
 
@@ -83,3 +100,22 @@ func _process(delta):
 	if $Timer.time_left != 0 :
 		_on_total_time_trainingUpdate($Timer.time_left)
 	pass
+
+
+func set_mKing(king):
+	_mKing = king
+	pass
+
+func set_link_trainButton(buttonTrain):
+	link_trainButton = buttonTrain
+	pass
+
+func destruction():
+	link_trainButton.removeWithBarrack()
+	.destruction()
+	pass
+
+func set_BarrackName(name : String):
+	$Label.set_text(name)
+	self.set_name(name)
+	
