@@ -23,3 +23,19 @@ texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="healthBar" type="ProgressBar" parent="."]
+visible = false
+margin_left = -40.0
+margin_top = -56.0
+margin_right = 41.0
+margin_bottom = -42.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReloadTime" type="Timer" parent="."]
+
+[node name="bulletList" type="Node2D" parent="."]
+[connection signal="timeout" from="ReloadTime" to="." method="_on_ReloadTime_timeout"]

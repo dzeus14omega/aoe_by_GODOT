@@ -70,6 +70,17 @@ margin_bottom = 37.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="healthBar" type="ProgressBar" parent="."]
+visible = false
+margin_left = -32.0
+margin_top = -49.0
+margin_right = 32.0
+margin_bottom = -35.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="direction/buildArea" to="." method="_on_minePoint_area_entered"]
 [connection signal="area_exited" from="direction/buildArea" to="." method="_on_minePoint_area_exited"]
 [connection signal="timeout" from="BuildingTimer" to="." method="_on_BuildingTimer_timeout"]

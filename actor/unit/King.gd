@@ -1,11 +1,14 @@
 class_name King extends KinematicBody2D
 
+#connection
+
 #UI control
 var joystick_move
 var speed = 150
 var rotationSpeed = 100
 var _minePoint
 
+var _hp = 250
 #Preload var
 var ui = preload("res://actor/player/UI.tscn")
 
@@ -22,7 +25,7 @@ var _tower = preload("res://actor/constuction/Tower.tscn").instance()
 
 #puppet control
 puppet var puppet_pos = Vector2()
-puppet var puppet_motion = Vector2()
+#puppet var puppet_motion = Vector2()
 puppet var puppet_rotation = 0
 
 var current_anim = ""
@@ -38,8 +41,13 @@ var MAX_BARRACKCOUNT = 7
 var cur_barrack_id = 0
 
 func _ready():
+	$healthBar.max_value = _hp
+	
 	puppet_pos = position
 	if is_network_master():
+		print("king ready here")
+		print(get_tree().get_network_unique_id())
+		print(get_network_master())
 		#add camera2d
 		var cam = Camera2D.new()
 		cam._set_current(true)
@@ -50,6 +58,18 @@ func _ready():
 		self.joystick_move = main_ui.get_node("Joystick")
 
 func _physics_process(_delta):
+	if self._hp <= 0:
+		self.hide()
+		if is_network_master():
+			rpc("destroyed")
+			return
+		else:
+			return
+	
+	if self._hp < $healthBar.max_value:
+		$healthBar.visible = true
+		$healthBar.value = self._hp
+		
 	#print($direction/wall_shadow.global_position)
 	var motion = _move(_delta)
 	
@@ -100,11 +120,11 @@ func _move(delta: float) -> Vector2:
 			motion = joystick_move.output * speed
 			#print(motion)
 			move_and_slide(motion)
-		rset("puppet_motion", motion)
+		#rset("puppet_motion", motion)
 		rset("puppet_pos", position)
 	else:
 		position = puppet_pos
-		motion = puppet_motion
+		#motion = puppet_motion
 	return motion
 
 
@@ -129,7 +149,7 @@ func _isBuildWallAvailable():
 #
 #	pass
 
-sync func setup_Construction(pos,rot,type):
+sync func setup_Construction(pos, rot, type, peerID):
 	var construction : Construction
 	if type == 3:
 		construction = _wall.duplicate()
@@ -150,8 +170,10 @@ sync func setup_Construction(pos,rot,type):
 			cur_barrack_id += 1
 		_minePoint.set_contruction(construction)
 	construction.position = pos
-	get_node("../Construction").add_child(construction)
+	construction.set_network_master(peerID)
 	
+	get_node("../Construction").add_child(construction)
+	pass
 
 func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wall
 	if is_network_master():
@@ -209,9 +231,9 @@ func _on_BuildingTimer_timeout():
 #		else:
 #			rpc("setup_Construction", _minePoint.global_position)
 		if _curBuildType == 3:
-			rpc("setup_Construction", $direction/buildWallArea.global_position, $direction.global_rotation, _curBuildType)
+			rpc("setup_Construction", $direction/buildWallArea.global_position, $direction.global_rotation, _curBuildType, get_parent().get_networkID())
 		else:
-			rpc("setup_Construction", _minePoint.global_position, $direction.global_rotation, _curBuildType)
+			rpc("setup_Construction", _minePoint.global_position, $direction.global_rotation, _curBuildType, get_parent().get_networkID())
 		_curBuildType == -1
 #		if _curBuildConstruction is GoldMiner:
 #			pass
@@ -249,3 +271,11 @@ func _on_minePoint_area_exited(area):
 				$UI.lock_buildContruction()
 	
 	pass # Replace with function body.
+
+func damaged(dam):
+	self._hp -= dam
+	pass
+
+sync func destroyed():
+	queue_free()
+	pass

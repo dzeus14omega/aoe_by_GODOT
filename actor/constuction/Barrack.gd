@@ -22,6 +22,7 @@ func _init():
 	self._cost = 100
 
 func _ready():
+	#print(is_network_master())
 	self.maxTrainAmount = $spawnList.get_child_count()
 	
 	if(get_parent() != null):
@@ -74,7 +75,7 @@ func _on_Timer_timeout():
 			var new_unitId = listTraining.pop_back()
 			
 #			new_unit.position = p.global_position
-			rpc("setup_unit", new_unitId, p.global_position)
+			rpc("setup_unit", new_unitId, p.global_position, get_network_master())
 			#add_child(new_unit)
 		else:
 			break
@@ -82,7 +83,7 @@ func _on_Timer_timeout():
 	$trainingProgress.visible = false
 	pass # Replace with function body.
 
-sync func setup_unit(unitID, pos):
+sync func setup_unit(unitID, pos, peerID):
 	#print(unit)
 	var new_unit : Unit
 	if unitID == 0:
@@ -92,6 +93,7 @@ sync func setup_unit(unitID, pos):
 	if unitID == 2:
 		new_unit = giant.duplicate()
 	new_unit.position = pos
+	new_unit.set_network_master(peerID)
 	get_node("../../Army").add_child(new_unit)
 	pass
 
@@ -111,7 +113,8 @@ func set_link_trainButton(buttonTrain):
 	pass
 
 func destruction():
-	link_trainButton.removeWithBarrack()
+	if is_network_master():
+		link_trainButton.removeWithBarrack()
 	.destruction()
 	pass
 
