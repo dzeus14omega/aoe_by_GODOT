@@ -3,7 +3,6 @@ class_name Kingdom extends Node2D
 var _mainTarget = null
 var _networkID
 
-
 func _ready():
 	_networkID = get_tree().get_network_unique_id()
 	pass # Replace with function body.
@@ -44,3 +43,5 @@ func get_mainTarget():
 
 func get_networkID():
 	return _networkID
+
+

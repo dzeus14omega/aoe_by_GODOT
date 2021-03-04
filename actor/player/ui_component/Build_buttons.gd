@@ -16,14 +16,14 @@ func _ready():
 #	pass
 
 func buildConstructionAllow():
-	print("button allow")
+	#print("button allow")
 	$listButton/buildBarrack.disabled = false
 	$listButton/buildGoldMine.disabled = false
 	$listButton/buildTower.disabled = false
 	pass
 
 func buildConstructionDisable():
-	print("button disable")
+	#print("button disable")
 	$listButton/buildBarrack.disabled = true
 	$listButton/buildGoldMine.disabled = true
 	$listButton/buildTower.disabled = true

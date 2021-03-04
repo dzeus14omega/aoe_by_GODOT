@@ -7,35 +7,53 @@
 [node name="mine_points" type="Node" parent="."]
 
 [node name="minePoint" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 245.684, 137.331 )
+position = Vector2( 304, 360 )
 
 [node name="minePoint2" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 880.684, 325.059 )
+position = Vector2( 1528, 888 )
 
 [node name="minePoint3" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 95.754, 311.2 )
+position = Vector2( 256, 672 )
 
 [node name="minePoint4" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 679.097, 57.9564 )
+position = Vector2( 520, 152 )
 
 [node name="minePoint5" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 411.994, 516.567 )
+position = Vector2( 1704, 616 )
 
 [node name="minePoint6" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 583.343, 326.319 )
+position = Vector2( 472, 920 )
+
+[node name="minePoint7" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1432, 160 )
+
+[node name="minePoint8" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1600, 384 )
+
+[node name="minePoint9" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 768, 552 )
+
+[node name="minePoint10" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1136, 608 )
+
+[node name="minePoint11" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 976, 328 )
+
+[node name="minePoint12" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 920, 840 )
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="0" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 64, 51 )
+position = Vector2( 128, 128 )
 
 [node name="1" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 65, 531 )
+position = Vector2( 128, 960 )
 
 [node name="2" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 938, 536 )
+position = Vector2( 1800, 960 )
 
 [node name="3" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 941, 71 )
+position = Vector2( 1792, 136 )
 
 [node name="kingdoms" type="Node2D" parent="."]

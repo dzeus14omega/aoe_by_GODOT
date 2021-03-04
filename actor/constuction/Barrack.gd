@@ -6,6 +6,8 @@ var maxTrainAmount
 var listTraining : Array
 var _mKing
 
+var id_unit = 0
+
 var soldier = preload("res://actor/unit/Soldier.tscn").instance()
 var archer = preload("res://actor/unit/Archer.tscn").instance()
 var giant = preload("res://actor/unit/Giant.tscn").instance()
@@ -22,14 +24,17 @@ func _init():
 	self._cost = 100
 
 func _ready():
+	print(get_network_master())
 	#print(is_network_master())
 	self.maxTrainAmount = $spawnList.get_child_count()
 	
-	if(get_parent() != null):
+	if(get_parent() != null and is_network_master()):
 		_mKing = get_node("../../king")
 		if _mKing.get_node("UI") != null:
 			_mKing.get_node("UI").get_node("tacticalControl").addButtonTrain(self)
 		pass
+	
+	$healthBar.max_value = _hp
 	#print(maxTrainAmount)
 	#trainAmry(soldier.instance())
 
@@ -75,7 +80,9 @@ func _on_Timer_timeout():
 			var new_unitId = listTraining.pop_back()
 			
 #			new_unit.position = p.global_position
-			rpc("setup_unit", new_unitId, p.global_position, get_network_master())
+			call_deferred("rpc", "setup_unit", new_unitId, p.global_position, get_network_master(), id_unit)
+			id_unit += 1
+			#rpc("setup_unit", new_unitId, p.global_position, get_network_master())
 			#add_child(new_unit)
 		else:
 			break
@@ -83,7 +90,7 @@ func _on_Timer_timeout():
 	$trainingProgress.visible = false
 	pass # Replace with function body.
 
-sync func setup_unit(unitID, pos, peerID):
+sync func setup_unit(unitID, pos, peerID, idUnit):
 	#print(unit)
 	var new_unit : Unit
 	if unitID == 0:
@@ -93,12 +100,26 @@ sync func setup_unit(unitID, pos, peerID):
 	if unitID == 2:
 		new_unit = giant.duplicate()
 	new_unit.position = pos
+	new_unit.set_name(self.get_name() + String(idUnit))
 	new_unit.set_network_master(peerID)
+	
 	get_node("../../Army").add_child(new_unit)
 	pass
 
 
 func _process(delta):
+	if self._hp <= 0 and is_network_master():
+		if is_network_master():
+			link_trainButton.removeWithBarrack()
+		rpc("destroy")
+		
+	if self._hp < $healthBar.max_value:
+		$healthBar.visible = true
+		if self._hp < 0:
+			$healthBar.value = 0
+		else :
+			$healthBar.value = self._hp
+	
 	if $Timer.time_left != 0 :
 		_on_total_time_trainingUpdate($Timer.time_left)
 	pass
@@ -121,4 +142,9 @@ func destruction():
 func set_BarrackName(name : String):
 	$Label.set_text(name)
 	self.set_name(name)
-	
+
+func damaged(dam):
+	self._hp -= dam
+	pass
+
+

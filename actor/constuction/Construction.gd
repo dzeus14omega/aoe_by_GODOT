@@ -1,4 +1,4 @@
-class_name Construction extends StaticBody2D
+class_name Construction extends StaticBody2D 
 
 var _hp
 var _buildTime
@@ -14,10 +14,18 @@ func _ready():
 	pass # Replace with function body.
 
 func destruction():
-	hide()
-	get_parent().remove_child(self)
+	#hide()
+	#get_parent().remove_child(self)
 	queue_free()
 	pass
+
+sync func destroy():
+	queue_free()
+	pass
+
+func checkExist():
+	if self._hp <= 0 and is_network_master():
+		rpc("destroy")
 
 func getBuildTime():
 	return _buildTime

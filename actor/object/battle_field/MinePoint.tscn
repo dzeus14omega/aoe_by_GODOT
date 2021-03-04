@@ -4,13 +4,18 @@
 [ext_resource path="res://actor/object/battle_field/MinePoint.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 45.1149
+radius = 88.3629
 
 [node name="minePoint" type="Area2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="icon" type="Sprite" parent="."]
 modulate = Color( 0.87451, 1, 0, 1 )
+position = Vector2( -1.90735e-06, 1.90735e-06 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,16 +1,106 @@
 class_name Giant extends Unit
 
+var main_target = null
+var state_command : int = 0  #0:attack  1:defense
 
-func _ready():
-	pass 
+var _direction : Vector2
+#puppet control
+puppet var puppet_pos = Vector2()
+puppet var puppet_rotation = 0
 
+#for instance in trainButton
 func init():
 	self._trainTime = 10
-	self._cost = 100
+	self._cost = 150
+	self._speed = 140
+	self._hp = 450
+	self._damage = 50
 
+# for init when create new
 func _init():
 	self._trainTime = 10
-	self._cost = 100
+	self._cost = 150
+	self._speed = 140
+	self._hp = 450
+	self._damage = 50
 
-#func _process(delta):
-#	pass
+func _ready():
+	$healthBar.max_value = self._hp
+	pass # Replace with function body.
+
+sync func attack():
+	$ironPunch.attack()
+	pass
+
+
+func _process(delta):
+	.checkAlive()
+	
+	if self._hp < $healthBar.max_value:
+		$healthBar.visible = true
+		if self._hp < 0:
+			$healthBar.value = 0
+		else :
+			$healthBar.value = self._hp
+	
+	#set value for main target
+	if get_parent().is_network_master() and get_parent() != null:
+		_find_closestEnemy()
+		if main_target ==null:
+			main_target = get_parent().get_parent().get_mainTarget()
+		#print(main_target)
+		
+		if (main_target != null):
+			_rotate_to_mainTarget()
+			if state_command == 0:
+				_move_to_main_Target()
+				pass
+			if state_command == 1:
+				#move to King and keep distance around King
+				
+				pass
+			rset("puppet_rotation", self.rotation)
+			rset("puppet_pos", self.global_position)
+	else:
+		self.rotation = puppet_rotation
+		self.position = puppet_pos
+	
+	
+	# attack main target if getting close
+	if main_target != null and is_network_master():
+		var disToTarget = self.global_position.distance_to(main_target.global_position)
+		#print(disToTarget)
+		if disToTarget < 150:
+			if not $ironPunch/punch_attack.is_playing():
+				rpc("attack")
+				#print("attck call in soldier")
+			#else:
+				#print("deny attack")
+	pass
+
+func _rotate_to_mainTarget():
+	self.look_at(main_target.global_position)
+	var motion = Vector2(main_target.global_position.x - self.global_position.x, main_target.global_position.y - self.global_position.y)
+	motion = motion.normalized()
+	self._direction = motion
+	pass
+
+func _move_to_main_Target():
+	if main_target != null:
+		move_and_slide(self._direction * _speed)
+	pass
+
+func _find_closestEnemy():
+	var bodies = $view_range.get_overlapping_bodies()
+	var closestEnemy = null
+	var minDist = 10000;
+	
+	for body in bodies:
+		if body.get_network_master() != self.get_network_master() and body is PhysicsBody2D:
+			var dist = self.global_position.distance_to(body.global_position)
+			if dist < minDist:
+				minDist = dist
+				closestEnemy = body
+	self.main_target = closestEnemy
+
+

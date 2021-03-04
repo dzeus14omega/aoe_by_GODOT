@@ -4,7 +4,7 @@ class_name King extends KinematicBody2D
 
 #UI control
 var joystick_move
-var speed = 150
+var speed = 250
 var rotationSpeed = 100
 var _minePoint
 
@@ -17,12 +17,6 @@ var _goldmine = preload("res://actor/constuction/GoldMiner.tscn").instance()
 var _barrack = preload("res://actor/constuction/Barrack.tscn").instance()
 var _tower = preload("res://actor/constuction/Tower.tscn").instance()
 
-#time build
-#var TIME_BUILD_GOLDMINE = 8
-#var TIME_BUILD_TOWER = 4
-#var TIME_BUILD_BARRACK = 8
-#var TIME_BUILD_WALL = 5
-
 #puppet control
 puppet var puppet_pos = Vector2()
 #puppet var puppet_motion = Vector2()
@@ -31,6 +25,7 @@ puppet var puppet_rotation = 0
 var current_anim = ""
 
 var outFit 
+var _current_gold = 200
 
 #build control
 var _tmpPosBuilding := Vector2(0,0)
@@ -38,7 +33,7 @@ var _curBuildType : int
 
 ## barrack manage var
 var MAX_BARRACKCOUNT = 7
-var cur_barrack_id = 0
+var cur_construction_id = 0
 
 func _ready():
 	$healthBar.max_value = _hp
@@ -52,30 +47,38 @@ func _ready():
 		var cam = Camera2D.new()
 		cam._set_current(true)
 		add_child(cam)
-		#add ui
+		#add ui and setup ui
 		var main_ui = ui.instance()
 		add_child(main_ui)
 		self.joystick_move = main_ui.get_node("Joystick")
+		
+		main_ui.get_node("status/gold_amount").set_text(String(_current_gold))
 
 func _physics_process(_delta):
-	if self._hp <= 0:
-		self.hide()
-		if is_network_master():
-			rpc("destroyed")
-			return
-		else:
-			return
+#	if self._hp <= 0 and is_network_master():
+#		rpc("destroyed")
+		
+#	if self._hp <= 0:
+#		self.hide()
+#		if is_network_master():
+#			rpc("destroyed")
+#			return
+#		else:
+#			return
 	
 	if self._hp < $healthBar.max_value:
 		$healthBar.visible = true
-		$healthBar.value = self._hp
+		if self._hp < 0:
+			$healthBar.value = 0
+		else :
+			$healthBar.value = self._hp
 		
 	#print($direction/wall_shadow.global_position)
 	var motion = _move(_delta)
 	
 	#TODO: stop any action when moving
 	if (motion != Vector2(0,0) and $BuildingTimer.time_left >0 ):
-		print("stop build")
+		#print("stop build")
 		$BuildingTimer.stop()
 	
 	#TODO: show build progress
@@ -134,26 +137,12 @@ func _isBuildWallAvailable():
 		return true
 	return false
 
-#sync func setup_wall(pos, rot):
-#	_curBuildConstruction.position = pos
-#	_curBuildConstruction.rotation = rot
-#	get_node("../Construction").add_child(_curBuildConstruction)
-#	_curBuildConstruction = null
-#	pass
-#
-#sync func setup_Construction(pos):
-#	_curBuildConstruction.position = pos
-#	get_node("../Construction").add_child(_curBuildConstruction)
-#	_minePoint.set_contruction(_curBuildConstruction)
-#	_curBuildConstruction = null
-#
-#	pass
-
-sync func setup_Construction(pos, rot, type, peerID):
+sync func setup_Construction(pos, rot, type, peerID, constructID):
 	var construction : Construction
 	if type == 3:
 		construction = _wall.duplicate()
 		construction.rotation = rot
+		construction.set_name("wall"+String(constructID))
 	else :
 		match type:
 			0:
@@ -165,13 +154,22 @@ sync func setup_Construction(pos, rot, type, peerID):
 		
 		#set barrack id if is barrack
 		if (construction is Barrack):
-			var barrackName = "barrack " + String(cur_barrack_id)
+			var barrackName = "barrack" + String(constructID)
 			construction.set_BarrackName(barrackName)
-			cur_barrack_id += 1
+			
+		if (construction is GoldMiner):
+			construction.set_name("goldmine" + String(constructID))
+			#setup for gold mine
+			if (get_network_master() == peerID):
+				construction.link_myKing = self
+				
+		if (construction is Tower):
+			construction.set_name("tower" + String(constructID))
+			
 		_minePoint.set_contruction(construction)
 	construction.position = pos
 	construction.set_network_master(peerID)
-	
+	#print("set construction peer= " +String(peerID))
 	get_node("../Construction").add_child(construction)
 	pass
 
@@ -180,14 +178,18 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 		_curBuildType = type
 		if type == 3:
 			if _isBuildWallAvailable():
-				$BuildingTimer.wait_time = _wall.getBuildTime()
-				_on_timeBuildingUpdate($BuildingTimer.wait_time)
-				$buildProgress.visible = true
-				$BuildingTimer.start()
-				_tmpPosBuilding = self.position
-				pass
+				if (spendGold_If_Possible(_wall._cost)):
+					$BuildingTimer.wait_time = _wall.getBuildTime()
+					_on_timeBuildingUpdate($BuildingTimer.wait_time)
+					$buildProgress.visible = true
+					$BuildingTimer.start()
+					_tmpPosBuilding = self.position
+				else:
+					#TODO: Warn by UI gold
+					pass
 			else:
 				#TODO: display wall_shadow red to warnning
+				
 				pass
 		else:
 			if _minePoint != null:
@@ -197,6 +199,7 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 					if child is Barrack:
 						cur_barrackNum += 1
 				if cur_barrackNum > MAX_BARRACKCOUNT - 1:
+					#TODO: Warn in UI: max barrack count
 					return
 				
 				var construction : Construction
@@ -209,37 +212,32 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 					2:
 						construction = _tower
 				
-				
-				$BuildingTimer.wait_time = construction.getBuildTime()
-				_on_timeBuildingUpdate($BuildingTimer.wait_time)
-				$buildProgress.visible = true
-				$BuildingTimer.start()
-				_tmpPosBuilding = self.position
-				pass
+				if spendGold_If_Possible(construction._cost):
+					$BuildingTimer.wait_time = construction.getBuildTime()
+					_on_timeBuildingUpdate($BuildingTimer.wait_time)
+					$buildProgress.visible = true
+					$BuildingTimer.start()
+					_tmpPosBuilding = self.position
+				else:
+					#TODO: Warn by UI gold
+					pass
 	pass
 
 func _on_BuildingTimer_timeout():
 	if (self.position == _tmpPosBuilding):
 		#build wall
 		$buildProgress.visible = false
-#		if _curBuildConstruction is Barrack:
-#			_curBuildConstruction.set_mKing(self)
-#			pass
-			
-#		if _curBuildConstruction is Wall:
-#			rpc("setup_wall", $direction/buildWallArea.global_position, $direction.global_rotation)
-#		else:
-#			rpc("setup_Construction", _minePoint.global_position)
+		
 		if _curBuildType == 3:
-			rpc("setup_Construction", $direction/buildWallArea.global_position, $direction.global_rotation, _curBuildType, get_parent().get_networkID())
+			call_deferred("rpc", "setup_Construction",  $direction/buildWallArea.global_position, $direction.global_rotation, _curBuildType, get_network_master(), cur_construction_id)
+			#rpc("setup_Construction", $direction/buildWallArea.global_position, $direction.global_rotation, _curBuildType, get_network_master(), cur_construction_id)
 		else:
-			rpc("setup_Construction", _minePoint.global_position, $direction.global_rotation, _curBuildType, get_parent().get_networkID())
+			call_deferred("rpc", "setup_Construction", _minePoint.global_position, $direction.global_rotation, _curBuildType, get_network_master(), cur_construction_id)
+			#rpc("setup_Construction", _minePoint.global_position, $direction.global_rotation, _curBuildType, get_network_master(), cur_construction_id)
 		_curBuildType == -1
-#		if _curBuildConstruction is GoldMiner:
-#			pass
-#
-#		if _curBuildConstruction is Tower:
-#			pass
+		
+		#for set name construction: unless error rpc method
+		cur_construction_id += 1
 	pass # Replace with function body.
 
 func _on_total_Building(time_left):
@@ -279,3 +277,21 @@ func damaged(dam):
 sync func destroyed():
 	queue_free()
 	pass
+
+
+#currency management
+func gain_gold(amountOfGold):
+	self._current_gold += amountOfGold
+	$UI/status/gold_amount.set_text(String(checkGoldLeft()))
+	pass
+
+func spendGold_If_Possible(amountOfGold):
+	if self._current_gold - amountOfGold >= 0:
+		_current_gold -= amountOfGold
+		$UI/status/gold_amount.set_text(String(checkGoldLeft()))
+		return true
+	else:
+		return false
+
+func checkGoldLeft():
+	return self._current_gold

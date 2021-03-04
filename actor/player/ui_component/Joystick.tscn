@@ -4,12 +4,13 @@
 [ext_resource path="res://assets/ui/bound_button-export.png" type="Texture" id=2]
 [ext_resource path="res://actor/player/ui_component/Joystick.gd" type="Script" id=3]
 
-
 [node name="Joystick" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -524.0
-margin_bottom = -100.0
+margin_top = 384.0
+margin_right = -1403.0
+margin_bottom = -232.0
+rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

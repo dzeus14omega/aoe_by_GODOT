@@ -19,12 +19,8 @@ func getCost():
 	return _cost
 
 func checkAlive():
-	if self._hp <= 0:
-		self.hide()
-		if is_network_master():
-			rpc("destroyed")
-		else:
-			return
+	if self._hp <= 0 and is_network_master():
+		rpc("destroyed")
 
 func damaged(dam):
 	self._hp -= dam

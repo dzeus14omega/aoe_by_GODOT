@@ -26,6 +26,7 @@ func _on_host_pressed():
 
 	var player_name = $Connect/Name.text
 	gamestate.host_game(player_name)
+	$Players/HostIP.text = str(IP.get_local_addresses())
 	refresh_lobby()
 
 

@@ -4,10 +4,9 @@
 
 [node name="tacticalControl" type="Control"]
 anchor_right = 1.0
-margin_left = -1.0
-margin_top = -2.0
-margin_right = -209.0
-margin_bottom = 153.0
+margin_right = -1058.0
+margin_bottom = 155.0
+rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -6,6 +6,10 @@
 anchor_top = -0.00166667
 anchor_right = 1.0
 anchor_bottom = 0.998333
+margin_left = 120.0
+margin_top = 8.0
+margin_right = 120.0
+margin_bottom = 8.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
@@ -19,48 +23,59 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -126.0
-margin_top = -177.5
-margin_right = 126.0
-margin_bottom = 177.5
+margin_left = -446.0
+margin_top = -474.0
+margin_right = 1.0
+margin_bottom = 6.00018
+rect_scale = Vector2( 2, 2 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="Players"]
-margin_left = 26.0
-margin_top = 18.0
-margin_right = 142.0
-margin_bottom = 32.0
+margin_left = 167.0
+margin_top = 11.9
+margin_right = 283.0
+margin_bottom = 25.9
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Awaiting Players..."
 
 [node name="Start" type="Button" parent="Players"]
-margin_left = 68.0
-margin_top = 307.0
-margin_right = 193.0
-margin_bottom = 336.0
+margin_left = 31.0
+margin_top = 415.9
+margin_right = 415.0
+margin_bottom = 444.9
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "START!"
 
 [node name="List" type="ItemList" parent="Players"]
-margin_left = 25.0
-margin_top = 37.0
-margin_right = 229.0
-margin_bottom = 296.0
+margin_left = 27.0
+margin_top = 35.9
+margin_right = 417.0
+margin_bottom = 310.9
 size_flags_horizontal = 2
 size_flags_vertical = 2
+
+[node name="HostIP" type="RichTextLabel" parent="Players"]
+margin_left = 31.0
+margin_top = 324.0
+margin_right = 417.0
+margin_bottom = 407.0
 
 [node name="Connect" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -138.5
-margin_top = -83.5
-margin_right = 138.5
-margin_bottom = 83.5
+margin_left = -832.0
+margin_top = -474.0
+margin_right = 320.0
+margin_bottom = -307.0
+rect_scale = Vector2( 1.5, 1.5 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 __meta__ = {
@@ -68,55 +83,58 @@ __meta__ = {
 }
 
 [node name="NameLabel" type="Label" parent="Connect"]
-margin_left = 14.0
-margin_top = 11.0
-margin_right = 56.0
-margin_bottom = 25.0
+margin_left = 122.667
+margin_top = 42.5333
+margin_right = 164.667
+margin_bottom = 56.5333
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Name:"
 
 [node name="Name" type="LineEdit" parent="Connect"]
-margin_left = 17.0
-margin_top = 30.0
-margin_right = 173.0
-margin_bottom = 54.0
+margin_left = 170.667
+margin_top = 32.0
+margin_right = 539.667
+margin_bottom = 69.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "The Warrior"
 
 [node name="IPLabel" type="Label" parent="Connect"]
-margin_left = 15.0
-margin_top = 66.0
-margin_right = 57.0
-margin_bottom = 80.0
+margin_left = 629.333
+margin_top = 42.5333
+margin_right = 671.333
+margin_bottom = 56.5333
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "IP:"
 
 [node name="IPAddress" type="LineEdit" parent="Connect"]
-margin_left = 17.0
-margin_top = 85.0
-margin_right = 173.0
-margin_bottom = 109.0
+margin_left = 666.667
+margin_top = 32.0
+margin_right = 1034.67
+margin_bottom = 69.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "127.0.0.1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Host" type="Button" parent="Connect"]
-margin_left = 181.0
-margin_top = 31.0
-margin_right = 246.0
-margin_bottom = 51.0
+margin_left = 128.0
+margin_top = 107.0
+margin_right = 384.0
+margin_bottom = 150.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Host"
 
 [node name="Join" type="Button" parent="Connect"]
-margin_left = 181.0
-margin_top = 87.0
-margin_right = 246.0
-margin_bottom = 107.0
+margin_left = 768.0
+margin_top = 107.0
+margin_right = 1024.0
+margin_bottom = 149.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Join"
