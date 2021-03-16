@@ -6,10 +6,8 @@
 anchor_top = -0.00166667
 anchor_right = 1.0
 anchor_bottom = 0.998333
-margin_left = 120.0
-margin_top = 8.0
-margin_right = 120.0
-margin_bottom = 8.0
+margin_top = 1.8
+margin_bottom = 1.80005
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
@@ -23,14 +21,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -446.0
-margin_top = -474.0
-margin_right = 1.0
-margin_bottom = 6.00018
+margin_left = -448.0
+margin_top = -476.0
+margin_right = -1.0
+margin_bottom = 4.00055
 rect_scale = Vector2( 2, 2 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -71,14 +70,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -832.0
-margin_top = -474.0
-margin_right = 320.0
-margin_bottom = -307.0
+margin_left = -864.0
+margin_top = -490.0
+margin_right = 288.0
+margin_bottom = -323.0
 rect_scale = Vector2( 1.5, 1.5 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -90,6 +90,9 @@ margin_bottom = 56.5333
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Name" type="LineEdit" parent="Connect"]
 margin_left = 170.667
@@ -99,6 +102,9 @@ margin_bottom = 69.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "The Warrior"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="IPLabel" type="Label" parent="Connect"]
 margin_left = 629.333
@@ -108,6 +114,9 @@ margin_bottom = 56.5333
 size_flags_horizontal = 2
 size_flags_vertical = 0
 text = "IP:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="IPAddress" type="LineEdit" parent="Connect"]
 margin_left = 666.667
@@ -129,6 +138,9 @@ margin_bottom = 150.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Host"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Join" type="Button" parent="Connect"]
 margin_left = 768.0
@@ -138,6 +150,9 @@ margin_bottom = 149.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ErrorLabel" type="Label" parent="Connect"]
 margin_left = 15.0
@@ -148,12 +163,18 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 margin_right = 55.0
 margin_bottom = 58.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]

@@ -1,24 +1,68 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://actor/unit/King.gd" type="Script" id=2]
+[ext_resource path="res://assets/tool_and_weapon/hammer1.png" type="Texture" id=3]
+[ext_resource path="res://assets/character/king.png" type="Texture" id=4]
+[ext_resource path="res://actor/unit/animation_and_effect/Blood_effect.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/character/king2.png" type="Texture" id=6]
+[ext_resource path="res://assets/character/king4.png" type="Texture" id=7]
+[ext_resource path="res://assets/character/king5.png" type="Texture" id=8]
+[ext_resource path="res://assets/character/king6.png" type="Texture" id=9]
+[ext_resource path="res://assets/character/king3.png" type="Texture" id=10]
+[ext_resource path="res://assets/character/king1.png" type="Texture" id=11]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 26.6264
 height = 282.66
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 32, 34.56 )
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 48.0
+
+[sub_resource type="Animation" id=5]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("direction/Position2D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 2.21914, 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 60.0, 0.0 ]
+}
 
 [node name="king" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="direction" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1.37091e-06, -2.28474 )
+scale = Vector2( 0.271186, 0.271186 )
+texture = ExtResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+scale = Vector2( 0.754717, 0.764585 )
+frames = SubResource( 1 )
+animation = "move"
+frame = 1
+
+[node name="direction" type="Node2D" parent="."]
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 1 )
 
 [node name="buildArea" type="Area2D" parent="direction"]
 scale = Vector2( 0.220463, 0.874717 )
@@ -26,7 +70,7 @@ scale = Vector2( 0.220463, 0.874717 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="direction/buildArea"]
 position = Vector2( 0, -35 )
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="buildWallArea" type="Area2D" parent="direction"]
 visible = false
@@ -39,15 +83,19 @@ scale = Vector2( 0.992061, 1.03513 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="direction/buildWallArea"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
-[node name="hammer" type="Sprite" parent="direction"]
-position = Vector2( 16.9271, -20.4907 )
-scale = Vector2( 0.220463, 0.874717 )
-texture = ExtResource( 1 )
+[node name="Position2D" type="Position2D" parent="direction"]
+position = Vector2( 21.3333, 10.6667 )
+
+[node name="hammer" type="Sprite" parent="direction/Position2D"]
+position = Vector2( 5.33333, -21.3333 )
+rotation = 3.14159
+scale = Vector2( 0.233, -0.233 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -29.0
@@ -82,6 +130,11 @@ percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/build = SubResource( 5 )
+
+[node name="blood_effect" parent="." instance=ExtResource( 5 )]
 [connection signal="area_entered" from="direction/buildArea" to="." method="_on_minePoint_area_entered"]
 [connection signal="area_exited" from="direction/buildArea" to="." method="_on_minePoint_area_exited"]
 [connection signal="timeout" from="BuildingTimer" to="." method="_on_BuildingTimer_timeout"]

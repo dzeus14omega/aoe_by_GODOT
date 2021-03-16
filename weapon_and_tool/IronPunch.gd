@@ -6,7 +6,7 @@ var _dam : int
 
 func _ready():
 	if (get_parent() != null):
-		self._dam = get_parent()._damage
+		self._dam = get_parent().get_parent()._damage
 	
 #	var my_random_number = rng.randf_range(0,1)
 #	print(my_random_number)

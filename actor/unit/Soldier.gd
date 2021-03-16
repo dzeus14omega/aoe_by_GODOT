@@ -26,10 +26,11 @@ func init():
 
 func _ready():
 	$healthBar.max_value = self._hp
+	$AnimatedSprite.play("move")
 	pass # Replace with function body.
 
 sync func attack(random_number):
-	$shortSword.attack(random_number)
+	$direction/shortSword.attack(random_number)
 	pass
 
 
@@ -54,15 +55,19 @@ func _process(delta):
 			_rotate_to_mainTarget()
 			if state_command == 0:
 				_move_to_main_Target()
+				$AnimatedSprite.visible = true
+				$sprite.visible = false
 				pass
 			if state_command == 1:
 				#move to King and keep distance around King
 				
 				pass
-			rset("puppet_rotation", self.rotation)
+			rset("puppet_rotation", $direction.rotation)
 			rset("puppet_pos", self.global_position)
 	else:
-		self.rotation = puppet_rotation
+		$direction.rotation = puppet_rotation
+		$AnimatedSprite.visible = true
+		$sprite.visible = false
 		self.position = puppet_pos
 	
 	
@@ -73,7 +78,7 @@ func _process(delta):
 		if disToTarget < 120:
 			rng.randomize()
 			var random_number = rng.randf_range(0,1)
-			if not $shortSword/slash_atk.is_playing():
+			if not $direction/shortSword/slash_atk.is_playing():
 				rpc("attack", random_number)
 				#print("attck call in soldier")
 			#else:
@@ -81,7 +86,7 @@ func _process(delta):
 	pass
 
 func _rotate_to_mainTarget():
-	self.look_at(main_target.global_position)
+	$direction.look_at(main_target.global_position)
 	var motion = Vector2(main_target.global_position.x - self.global_position.x, main_target.global_position.y - self.global_position.y)
 	motion = motion.normalized()
 	self._direction = motion

@@ -30,6 +30,7 @@ var _current_gold = 200
 #build control
 var _tmpPosBuilding := Vector2(0,0)
 var _curBuildType : int
+var _status : int = 0  #0: normal  1: building
 
 ## barrack manage var
 var MAX_BARRACKCOUNT = 7
@@ -37,6 +38,7 @@ var cur_construction_id = 0
 
 func _ready():
 	$healthBar.max_value = _hp
+	$AnimatedSprite.play("move")
 	
 	puppet_pos = position
 	if is_network_master():
@@ -65,6 +67,14 @@ func _physics_process(_delta):
 #			return
 #		else:
 #			return
+	
+	#cancel building
+	if (self._status == 1):
+		if (self.position != _tmpPosBuilding):
+			rpc("stopBuildingAnimate")
+			$buildProgress.visible = false
+			$BuildingTimer.stop()
+			self._status = 0
 	
 	if self._hp < $healthBar.max_value:
 		$healthBar.visible = true
@@ -123,9 +133,23 @@ func _move(delta: float) -> Vector2:
 			motion = joystick_move.output * speed
 			#print(motion)
 			move_and_slide(motion)
+			
+		if motion != Vector2(0,0):
+			$AnimatedSprite.visible = true
+			$Sprite.visible = false
+		else:
+			$AnimatedSprite.visible = false
+			$Sprite.visible = true
 		#rset("puppet_motion", motion)
 		rset("puppet_pos", position)
 	else:
+		if puppet_pos != position:
+			$AnimatedSprite.visible = true
+			$Sprite.visible = false
+		else:
+			$AnimatedSprite.visible = false
+			$Sprite.visible = true
+		
 		position = puppet_pos
 		#motion = puppet_motion
 	return motion
@@ -175,14 +199,19 @@ sync func setup_Construction(pos, rot, type, peerID, constructID):
 
 func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wall
 	if is_network_master():
+		
 		_curBuildType = type
 		if type == 3:
 			if _isBuildWallAvailable():
 				if (spendGold_If_Possible(_wall._cost)):
+					#manage status
+					self._status = 1
+					
 					$BuildingTimer.wait_time = _wall.getBuildTime()
 					_on_timeBuildingUpdate($BuildingTimer.wait_time)
 					$buildProgress.visible = true
 					$BuildingTimer.start()
+					rpc("startBuildingAnimate")
 					_tmpPosBuilding = self.position
 				else:
 					#TODO: Warn by UI gold
@@ -213,17 +242,33 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 						construction = _tower
 				
 				if spendGold_If_Possible(construction._cost):
+					#manage status
+					self._status = 1
+					
 					$BuildingTimer.wait_time = construction.getBuildTime()
 					_on_timeBuildingUpdate($BuildingTimer.wait_time)
 					$buildProgress.visible = true
 					$BuildingTimer.start()
+					rpc("startBuildingAnimate")
 					_tmpPosBuilding = self.position
 				else:
 					#TODO: Warn by UI gold
 					pass
 	pass
 
+sync func startBuildingAnimate():
+	$AnimationPlayer.play("build")
+	pass
+
+sync func stopBuildingAnimate():
+	$AnimationPlayer.stop()
+	$AnimationPlayer.seek(0, true)
+	pass
+
 func _on_BuildingTimer_timeout():
+	self._status = 0;
+	rpc("stopBuildingAnimate")
+	
 	if (self.position == _tmpPosBuilding):
 		#build wall
 		$buildProgress.visible = false
@@ -271,6 +316,7 @@ func _on_minePoint_area_exited(area):
 	pass # Replace with function body.
 
 func damaged(dam):
+	$blood_effect.emitting = true
 	self._hp -= dam
 	pass
 

@@ -8,7 +8,7 @@ var _arrow_onLoad = null
 
 func _ready():
 	if (get_parent() != null):
-		self.damage = get_parent()._damage
+		self.damage = get_parent().get_parent()._damage
 		pass
 	pass # Replace with function body.
 

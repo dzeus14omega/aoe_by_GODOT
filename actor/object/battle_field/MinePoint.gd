@@ -4,9 +4,12 @@ export var gold_capacity := 800
 var construction
 
 func _ready():
+	$biome_animated.play()
 	pass 
 
 func set_contruction(_construction):
+	$biome_animated.visible = false
+	
 	if self.construction == null:
 		self.construction = _construction
 	else:
@@ -14,6 +17,8 @@ func set_contruction(_construction):
 		self.construction = _construction
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if construction == null and $biome_animated.visible == false:
+		$biome_animated.visible = true
+	pass
+

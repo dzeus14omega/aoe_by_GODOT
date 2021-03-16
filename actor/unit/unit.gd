@@ -23,6 +23,8 @@ func checkAlive():
 		rpc("destroyed")
 
 func damaged(dam):
+	if (self.get_node("blood_effect") != null):
+		self.get_node("blood_effect").emitting = true
 	self._hp -= dam
 	pass
 

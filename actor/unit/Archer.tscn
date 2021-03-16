@@ -1,26 +1,48 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://assets/character/archer.png" type="Texture" id=1]
 [ext_resource path="res://actor/unit/Archer.gd" type="Script" id=2]
 [ext_resource path="res://weapon_and_tool/Bow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actor/unit/animation_and_effect/Blood_effect.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/character/archer3.png" type="Texture" id=5]
+[ext_resource path="res://assets/character/archer1.png" type="Texture" id=6]
+[ext_resource path="res://assets/character/archer2.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+} ]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 500.0
+radius = 450.0
 
 [node name="archer" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="icon" type="Sprite" parent="."]
-position = Vector2( -9.53674e-07, 9.53674e-07 )
+[node name="sprite" type="Sprite" parent="."]
+position = Vector2( -2.38419e-07, -3.33786e-06 )
+scale = Vector2( 0.219178, 0.226148 )
 texture = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 1.90735e-06, 0 )
+scale = Vector2( 0.597561, 0.597561 )
+frames = SubResource( 3 )
+animation = "move"
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="view_range" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="view_range"]
 shape = SubResource( 2 )
@@ -38,4 +60,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bow" parent="." instance=ExtResource( 3 )]
+[node name="direction" type="Node2D" parent="."]
+
+[node name="bow" parent="direction" instance=ExtResource( 3 )]
+
+[node name="blood_effect" parent="." instance=ExtResource( 4 )]

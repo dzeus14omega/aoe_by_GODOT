@@ -29,10 +29,11 @@ func _init():
 
 func _ready():
 	$healthBar.max_value = self._hp
+	$AnimatedSprite.play("move")
 	pass # Replace with function body.
 
 sync func attack(direction, peerID):
-	$bow.shoot(direction, peerID)
+	$direction/bow.shoot(direction, peerID)
 	pass
 
 
@@ -46,6 +47,7 @@ func _process(delta):
 		else :
 			$healthBar.value = self._hp
 	
+	
 	#set value for main target
 	if is_network_master() and get_parent() != null:
 		_find_closestEnemy()
@@ -57,24 +59,36 @@ func _process(delta):
 			_rotate_to_mainTarget()
 			if state_command == 0:
 				if targetInRange != null:
-					if not $bow/shoot.is_playing():
+					if not $direction/bow/shoot.is_playing():
 						rpc("attack", self._direction, self.get_network_master())
+					$AnimatedSprite.visible = false
+					$sprite.visible = true
 				else:
 					_move_to_main_Target()
+					$AnimatedSprite.visible = true
+					$sprite.visible = false
 				pass
 			if state_command == 1:
 				#move to King and keep distance around King
 				
 				pass
-			rset("puppet_rotation", self.rotation)
+			rset("puppet_rotation", $direction.rotation)
 			rset("puppet_pos", self.global_position)
 	else:
-		self.rotation = puppet_rotation
+		$direction.rotation = puppet_rotation
+		if (self.position != puppet_pos):
+			$AnimatedSprite.visible = true
+			$sprite.visible = false
+		else :
+			$AnimatedSprite.visible = false
+			$sprite.visible = true
 		self.position = puppet_pos
+		
+	
 	pass
 
 func _rotate_to_mainTarget():
-	self.look_at(main_target.global_position)
+	$direction.look_at(main_target.global_position)
 	var motion = Vector2(main_target.global_position.x - self.global_position.x, main_target.global_position.y - self.global_position.y)
 	motion = motion.normalized()
 	self._direction = motion
