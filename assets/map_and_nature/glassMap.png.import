@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light_effect.png-fc501583d5960fe3dea4f5f225b94a07.stex"
+path="res://.import/glassMap.png-f9b660e98465af0d756c3ad522b82d14.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/light_effect.png"
-dest_files=[ "res://.import/light_effect.png-fc501583d5960fe3dea4f5f225b94a07.stex" ]
+source_file="res://assets/map_and_nature/glassMap.png"
+dest_files=[ "res://.import/glassMap.png-f9b660e98465af0d756c3ad522b82d14.stex" ]
 
 [params]
 

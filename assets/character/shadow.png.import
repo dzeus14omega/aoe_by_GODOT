@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/joy_stick_button.png-2a112ae843a9002b4b3d4bde15e21a13.stex"
+path="res://.import/shadow.png-9b1db50626b2d46e1a50633bb0723581.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/joy_stick_button.png"
-dest_files=[ "res://.import/joy_stick_button.png-2a112ae843a9002b4b3d4bde15e21a13.stex" ]
+source_file="res://assets/character/shadow.png"
+dest_files=[ "res://.import/shadow.png-9b1db50626b2d46e1a50633bb0723581.stex" ]
 
 [params]
 
