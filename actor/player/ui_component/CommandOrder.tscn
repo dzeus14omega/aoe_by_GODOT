@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ui/icon_attack.png" type="Texture" id=1]
+[ext_resource path="res://actor/player/ui_component/CommandOrder.gd" type="Script" id=2]
+
+[node name="commandOrder" type="Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -576.0
+margin_top = -376.0
+margin_right = -256.0
+margin_bottom = -56.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="touchButton" type="TouchScreenButton" parent="."]
+position = Vector2( 32, 32 )
+scale = Vector2( 0.7, 0.7 )
+normal = ExtResource( 1 )
+[connection signal="pressed" from="touchButton" to="." method="_on_TouchScreenButton_pressed"]
