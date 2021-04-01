@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/character/archer1.png" type="Texture" id=6]
 [ext_resource path="res://assets/character/archer2.png" type="Texture" id=7]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ) ],
 "loop": true,
@@ -16,10 +16,10 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 32.0
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 450.0
 
 [node name="archer" type="KinematicBody2D"]
@@ -34,18 +34,18 @@ texture = ExtResource( 1 )
 visible = false
 position = Vector2( 1.90735e-06, 0 )
 scale = Vector2( 0.597561, 0.597561 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 animation = "move"
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="view_range" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="view_range"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="attack_cooldown" type="Timer" parent="."]
 
