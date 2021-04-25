@@ -37,18 +37,19 @@ animation = "move"
 frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 2 )
 
 [node name="view_range" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="view_range"]
+visible = false
 shape = SubResource( 3 )
 
 [node name="attack_cooldown" type="Timer" parent="."]
 
 [node name="healthBar" type="ProgressBar" parent="."]
-visible = false
 margin_left = -32.0
 margin_top = -56.0
 margin_right = 32.0

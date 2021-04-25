@@ -8,6 +8,7 @@ var _range
 var _speed
 var _trainTime
 var _cost
+var _ownKing
 
 func _ready():
 	pass # Replace with function body.

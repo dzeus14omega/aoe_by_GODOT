@@ -129,7 +129,7 @@ _global_script_class_icons={
 [application]
 
 config/name="aoe_final"
-run/main_scene="res://scenes/lobby.tscn"
+run/main_scene="res://scenes/mainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -146,6 +146,10 @@ window/stretch/aspect="keep"
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[network]
+
+limits/tcp/connect_timeout_seconds=5
 
 [rendering]
 

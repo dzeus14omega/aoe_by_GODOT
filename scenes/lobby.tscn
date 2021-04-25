@@ -1,13 +1,80 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://client_server/lobby.gd" type="Script" id=1]
+[ext_resource path="res://font_style/Amatic-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://font_style/AmaticSC-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/ui/ui_bar1.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/info_bar.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/btn_playPress.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/btn_play.png" type="Texture" id=7]
+[ext_resource path="res://actor/player/ui_component/color_buttongroup.tres" type="ButtonGroup" id=8]
+[ext_resource path="res://assets/icon/soldier_icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/btn_back.png" type="Texture" id=10]
+[ext_resource path="res://scenes/bg_castle.tscn" type="PackedScene" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 56
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=12]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorPane:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 0.196146, 1 ),
+"update": 0,
+"values": [ Vector2( 1928, 184 ), Vector2( 1464, 184 ) ]
+}
 
 [node name="Lobby" type="Control"]
 anchor_top = -0.00166667
 anchor_right = 1.0
 anchor_bottom = 0.998333
-margin_top = 3.8
-margin_bottom = 3.80005
+margin_top = 1.8
+margin_bottom = 1.80005
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
@@ -15,166 +82,410 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Players" type="Panel" parent="."]
+[node name="bg_castle" parent="." instance=ExtResource( 11 )]
+
+[node name="Players" type="TextureRect" parent="."]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -448.0
-margin_top = -476.0
-margin_right = -1.0
-margin_bottom = 4.00055
+margin_left = -704.0
+margin_top = -524.0
+margin_bottom = 4.00018
 rect_scale = Vector2( 2, 2 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Players"]
-margin_left = 167.0
-margin_top = 11.9
-margin_right = 283.0
-margin_bottom = 25.9
+margin_left = 248.0
+margin_top = 8.0
+margin_right = 448.0
+margin_bottom = 52.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
+custom_fonts/font = SubResource( 1 )
 text = "Awaiting Players..."
 
-[node name="Start" type="Button" parent="Players"]
-margin_left = 31.0
-margin_top = 415.9
-margin_right = 415.0
-margin_bottom = 444.9
-size_flags_horizontal = 2
-size_flags_vertical = 2
-text = "START!"
+[node name="Start" type="TouchScreenButton" parent="Players"]
+position = Vector2( 392, 388 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 6 )
 
 [node name="List" type="ItemList" parent="Players"]
-margin_left = 27.0
-margin_top = 35.9
-margin_right = 417.0
-margin_bottom = 310.9
+margin_left = 96.0
+margin_top = 68.0
+margin_right = 600.0
+margin_bottom = 288.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+theme = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="Players"]
+margin_left = 100.0
+margin_top = 300.0
+margin_right = 600.0
+margin_bottom = 384.0
+color = Color( 0.52549, 0.345098, 0.196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HostIP" type="RichTextLabel" parent="Players"]
-margin_left = 31.0
-margin_top = 324.0
-margin_right = 417.0
-margin_bottom = 407.0
+margin_left = 116.0
+margin_top = 308.0
+margin_right = 584.0
+margin_bottom = 376.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Connect" type="Panel" parent="."]
+[node name="Leave" type="TouchScreenButton" parent="Players"]
+position = Vector2( 116, 388 )
+scale = Vector2( 1.02273, 1.06667 )
+normal = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Players/Leave"]
+margin_left = 61.3953
+margin_top = 4.61533
+margin_right = 104.395
+margin_bottom = 48.6153
+custom_fonts/font = SubResource( 4 )
+text = "Leave"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Connect" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -864.0
-margin_top = -490.0
-margin_right = 288.0
-margin_bottom = -323.0
+margin_left = -696.0
+margin_top = -532.0
+margin_right = 237.0
+margin_bottom = 181.0
 rect_scale = Vector2( 1.5, 1.5 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
+texture = ExtResource( 4 )
+stretch_mode = 1
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="NameLabel" type="Label" parent="Connect"]
-margin_left = 122.667
-margin_top = 42.5333
-margin_right = 164.667
-margin_bottom = 56.5333
+margin_left = 149.333
+margin_top = 106.667
+margin_right = 229.333
+margin_bottom = 160.667
 size_flags_horizontal = 2
 size_flags_vertical = 0
+custom_fonts/font = SubResource( 5 )
 text = "Name:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="LineEdit" parent="Connect"]
-margin_left = 170.667
-margin_top = 32.0
-margin_right = 539.667
-margin_bottom = 69.0
+margin_left = 245.333
+margin_top = 112.0
+margin_right = 614.333
+margin_bottom = 166.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+custom_fonts/font = SubResource( 6 )
 text = "The Warrior"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="IPLabel" type="Label" parent="Connect"]
-margin_left = 629.333
-margin_top = 42.5333
-margin_right = 671.333
-margin_bottom = 56.5333
+margin_left = 192.0
+margin_top = 170.667
+margin_right = 234.0
+margin_bottom = 224.667
 size_flags_horizontal = 2
 size_flags_vertical = 0
+custom_fonts/font = SubResource( 7 )
 text = "IP:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="IPAddress" type="LineEdit" parent="Connect"]
-margin_left = 666.667
-margin_top = 32.0
-margin_right = 1034.67
-margin_bottom = 69.0
+margin_left = 245.333
+margin_top = 186.667
+margin_right = 613.333
+margin_bottom = 240.667
 size_flags_horizontal = 2
 size_flags_vertical = 2
+custom_fonts/font = SubResource( 8 )
 text = "127.0.0.1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Host" type="Button" parent="Connect"]
-margin_left = 128.0
-margin_top = 107.0
-margin_right = 384.0
-margin_bottom = 150.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[node name="Host" type="TouchScreenButton" parent="Connect"]
+position = Vector2( 144, 282.667 )
+scale = Vector2( 1.4, 1.4 )
+normal = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Connect/Host"]
+margin_left = 61.3953
+margin_top = 4.61533
+margin_right = 104.395
+margin_bottom = 48.6153
+custom_fonts/font = SubResource( 4 )
 text = "Host"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Join" type="Button" parent="Connect"]
-margin_left = 768.0
-margin_top = 107.0
-margin_right = 1024.0
-margin_bottom = 149.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[node name="Join" type="TouchScreenButton" parent="Connect"]
+position = Vector2( 778.667, 282.667 )
+scale = Vector2( -1.4, 1.4 )
+normal = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Connect/Join"]
+margin_left = 112.0
+margin_top = 5.33331
+margin_right = 159.0
+margin_bottom = 49.3333
+rect_scale = Vector2( -1, 1 )
+custom_fonts/font = SubResource( 9 )
 text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ErrorLabel" type="Label" parent="Connect"]
-margin_left = 15.0
-margin_top = 125.0
-margin_right = 257.0
-margin_bottom = 139.0
+margin_left = 283.0
+margin_top = 389.0
+margin_right = 646.0
+margin_bottom = 424.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BackMenu" type="TextureButton" parent="Connect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -621.167
+margin_top = -73.8332
+margin_right = -440.167
+margin_bottom = 4.16678
+texture_normal = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
-margin_right = 55.0
-margin_bottom = 58.0
+margin_top = 24.0
+margin_right = 83.0
+margin_bottom = 82.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
+
+[node name="ColorPane" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -356.0
+margin_right = 492.0
+margin_bottom = 357.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="ColorPane"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -162.0
+margin_top = -156.5
+margin_right = 74.0
+margin_bottom = 180.5
+rect_scale = Vector2( 1.4, 1.4 )
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="red" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 1, 0.435294, 0.435294, 1 )
+margin_right = 76.0
+margin_bottom = 70.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red2" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 1, 0.435294, 0.992157, 1 )
+margin_left = 80.0
+margin_right = 156.0
+margin_bottom = 70.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red3" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 0.87451, 0, 0.862745, 1 )
+margin_left = 160.0
+margin_right = 236.0
+margin_bottom = 70.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red4" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 1, 0.772549, 0.435294, 1 )
+margin_top = 74.0
+margin_right = 76.0
+margin_bottom = 144.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red5" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 0.713726, 0.764706, 0, 1 )
+margin_left = 80.0
+margin_top = 74.0
+margin_right = 156.0
+margin_bottom = 144.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red6" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 0.988235, 0.717647, 0, 1 )
+margin_left = 160.0
+margin_top = 74.0
+margin_right = 236.0
+margin_bottom = 144.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red7" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 0.666667, 1, 0.435294, 1 )
+margin_top = 148.0
+margin_right = 76.0
+margin_bottom = 218.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red8" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 0.00784314, 0.894118, 0, 1 )
+margin_left = 80.0
+margin_top = 148.0
+margin_right = 156.0
+margin_bottom = 218.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red10" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 0.435294, 1, 0.94902, 1 )
+margin_left = 160.0
+margin_top = 148.0
+margin_right = 236.0
+margin_bottom = 218.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red13" type="Button" parent="ColorPane/GridContainer"]
+modulate = Color( 0.439216, 0.435294, 1, 1 )
+margin_top = 222.0
+margin_right = 76.0
+margin_bottom = 292.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="red15" type="Button" parent="ColorPane/GridContainer"]
+margin_left = 80.0
+margin_top = 222.0
+margin_right = 156.0
+margin_bottom = 292.0
+custom_constants/hseparation = 19
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 8 )
+icon = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="ColorPane"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -252.5
+margin_right = 76.0
+margin_bottom = -191.5
+custom_fonts/font = SubResource( 11 )
+text = "Pick color"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/colorPane_in = SubResource( 12 )
+
+[connection signal="released" from="Players/Start" to="." method="_on_start_released"]
+[connection signal="pressed" from="Players/Leave" to="." method="_on_Leave_pressed"]
 [connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Connect/BackMenu" to="." method="_on_BackMenu_pressed"]

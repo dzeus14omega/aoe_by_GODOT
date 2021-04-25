@@ -70,7 +70,7 @@ func _process(delta):
 				pass
 			if state_command == 1:
 				#move to King and keep distance around King
-				
+				move_to_King()
 				pass
 			rset("puppet_rotation", $direction.rotation)
 			rset("puppet_pos", self.global_position)
@@ -97,6 +97,10 @@ func _rotate_to_mainTarget():
 func _move_to_main_Target():
 	if main_target != null:
 		move_and_slide(self._direction * _speed)
+	pass
+
+func move_to_King():
+	
 	pass
 
 func _find_closestEnemy():

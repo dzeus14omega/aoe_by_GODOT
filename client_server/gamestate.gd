@@ -12,6 +12,7 @@ var player_name = "The Warrior"
 # Names for remote players in id:name format.
 var players = {}
 var players_ready = []
+var colerDisable = []
 
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
@@ -19,11 +20,13 @@ signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
+signal player_colorPane_changed()
 
 # Callback from SceneTree.
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
-	rpc_id(id, "register_player", player_name)
+	#print(id)
+	rpc_id(id, "register_player", player_name, colerDisable)
 
 
 # Callback from SceneTree.
@@ -56,10 +59,8 @@ func _connected_fail():
 
 
 # Lobby management functions.
-
-remote func register_player(new_player_name):
+remote func register_player(new_player_name, colorDisable_list):
 	var id = get_tree().get_rpc_sender_id()
-	#print(id)
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
 
@@ -124,7 +125,6 @@ func host_game(new_player_name):
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
 
-
 func join_game(ip, new_player_name):
 	player_name = new_player_name
 	var client = NetworkedMultiplayerENet.new()
@@ -172,3 +172,5 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
+	
+	

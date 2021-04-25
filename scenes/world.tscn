@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://actor/object/battle_field/MinePoint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/map_and_nature/glassMap.png" type="Texture" id=2]
 
 [node name="World" type="YSort"]
 
@@ -57,3 +58,9 @@ position = Vector2( 968, 296 )
 position = Vector2( 1032, 1584 )
 
 [node name="kingdoms" type="Node2D" parent="."]
+
+[node name="glassMap" type="Sprite" parent="."]
+position = Vector2( 1926.25, 1081.25 )
+scale = Vector2( 3.41038, 3.37244 )
+z_index = -1
+texture = ExtResource( 2 )

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://assets/ui/WOODbox.jpg" type="Texture" id=1]
 [ext_resource path="res://actor/player/ui_component/Build_buttons.gd" type="Script" id=2]
 [ext_resource path="res://assets/icon/barack_icon.png" type="Texture" id=3]
 [ext_resource path="res://assets/icon/wall_icon.png" type="Texture" id=4]
@@ -20,15 +20,64 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color( 0, 0, 0, 1 )
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color( 0.670588, 0.670588, 0.670588, 1 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -80.0
-margin_top = -293.0
-margin_bottom = 48.0
+margin_top = -283.0
+margin_bottom = -213.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+modulate = Color( 0.670588, 0.670588, 0.670588, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -212.0
+margin_bottom = -142.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+modulate = Color( 0.670588, 0.670588, 0.670588, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -142.0
+margin_bottom = -72.0001
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+modulate = Color( 0.670588, 0.670588, 0.670588, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -79.6667
+margin_top = -72.0001
+margin_right = 0.333252
+margin_bottom = -2.00012
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 1

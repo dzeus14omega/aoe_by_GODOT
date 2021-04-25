@@ -44,4 +44,6 @@ func get_mainTarget():
 func get_networkID():
 	return _networkID
 
-
+func setOrderCommand(state):
+	#print("command change" + str(state))
+	pass
