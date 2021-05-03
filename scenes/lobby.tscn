@@ -342,7 +342,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="red" type="Button" parent="ColorPane/GridContainer"]
+[node name="color1" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 1, 0.435294, 0.435294, 1 )
 margin_right = 76.0
 margin_bottom = 70.0
@@ -352,7 +352,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red2" type="Button" parent="ColorPane/GridContainer"]
+[node name="color2" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 1, 0.435294, 0.992157, 1 )
 margin_left = 80.0
 margin_right = 156.0
@@ -363,7 +363,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red3" type="Button" parent="ColorPane/GridContainer"]
+[node name="color3" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 0.87451, 0, 0.862745, 1 )
 margin_left = 160.0
 margin_right = 236.0
@@ -374,7 +374,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red4" type="Button" parent="ColorPane/GridContainer"]
+[node name="color4" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 1, 0.772549, 0.435294, 1 )
 margin_top = 74.0
 margin_right = 76.0
@@ -385,7 +385,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red5" type="Button" parent="ColorPane/GridContainer"]
+[node name="color5" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 0.713726, 0.764706, 0, 1 )
 margin_left = 80.0
 margin_top = 74.0
@@ -397,7 +397,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red6" type="Button" parent="ColorPane/GridContainer"]
+[node name="color6" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 0.988235, 0.717647, 0, 1 )
 margin_left = 160.0
 margin_top = 74.0
@@ -409,7 +409,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red7" type="Button" parent="ColorPane/GridContainer"]
+[node name="color7" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 0.666667, 1, 0.435294, 1 )
 margin_top = 148.0
 margin_right = 76.0
@@ -420,7 +420,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red8" type="Button" parent="ColorPane/GridContainer"]
+[node name="color8" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 0.00784314, 0.894118, 0, 1 )
 margin_left = 80.0
 margin_top = 148.0
@@ -432,7 +432,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red10" type="Button" parent="ColorPane/GridContainer"]
+[node name="color9" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 0.435294, 1, 0.94902, 1 )
 margin_left = 160.0
 margin_top = 148.0
@@ -444,7 +444,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red13" type="Button" parent="ColorPane/GridContainer"]
+[node name="color10" type="Button" parent="ColorPane/GridContainer"]
 modulate = Color( 0.439216, 0.435294, 1, 1 )
 margin_top = 222.0
 margin_right = 76.0
@@ -455,7 +455,7 @@ shortcut_in_tooltip = false
 group = ExtResource( 8 )
 icon = ExtResource( 9 )
 
-[node name="red15" type="Button" parent="ColorPane/GridContainer"]
+[node name="color11" type="Button" parent="ColorPane/GridContainer"]
 margin_left = 80.0
 margin_top = 222.0
 margin_right = 156.0
@@ -489,3 +489,14 @@ anims/colorPane_in = SubResource( 12 )
 [connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Connect/BackMenu" to="." method="_on_BackMenu_pressed"]
+[connection signal="button_down" from="ColorPane/GridContainer/color1" to="." method="_on_color1_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color2" to="." method="_on_color2_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color3" to="." method="_on_color3_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color4" to="." method="_on_color4_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color5" to="." method="_on_color5_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color6" to="." method="_on_color6_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color7" to="." method="_on_color7_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color8" to="." method="_on_color8_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color9" to="." method="_on_color9_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color10" to="." method="_on_color10_button_down"]
+[connection signal="button_down" from="ColorPane/GridContainer/color11" to="." method="_on_color11_button_down"]

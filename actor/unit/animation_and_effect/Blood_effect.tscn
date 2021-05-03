@@ -8,7 +8,7 @@ emission_box_extents = Vector3( 10, 0, 1 )
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 150, 0 )
-initial_velocity = 30.0
+initial_velocity = 130.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 10.0
@@ -17,7 +17,7 @@ scale_random = 1.0
 [node name="blood_effect" type="Particles2D"]
 modulate = Color( 0.827451, 0, 0, 1 )
 emitting = false
-amount = 20
+amount = 25
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0

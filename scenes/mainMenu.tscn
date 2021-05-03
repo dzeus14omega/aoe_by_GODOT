@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/bg_castle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/btn_playPress.png" type="Texture" id=2]
@@ -9,6 +9,46 @@
 [ext_resource path="res://assets/ui/btn_quit.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/btn_quitPress.png" type="Texture" id=8]
 [ext_resource path="res://scenes/mainMenu.gd" type="Script" id=9]
+[ext_resource path="res://assets/ui/e.png" type="Texture" id=10]
+
+[sub_resource type="Animation" id=1]
+resource_name = "title_fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Title:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1080, 900 ), Vector2( 1080, 400 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Title:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Title:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.0666667, 0.0666667, 0.0666667, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -78,6 +118,24 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Title" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -840.0
+margin_top = -680.0
+margin_right = -200.0
+margin_bottom = -191.997
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/title_fade_in = SubResource( 1 )
 
 [connection signal="button_up" from="TextureRect/btn_play" to="." method="_on_btn_play_button_up"]
 [connection signal="button_up" from="TextureRect/btn_setting" to="." method="_on_btn_setting_button_up"]

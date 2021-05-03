@@ -17,7 +17,7 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="range"]
 shape = SubResource( 1 )
 
-[node name="icon" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 4.33681e-19, -8 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
@@ -39,4 +39,5 @@ __meta__ = {
 [node name="ReloadTime" type="Timer" parent="."]
 
 [node name="bulletList" type="Node2D" parent="."]
+
 [connection signal="timeout" from="ReloadTime" to="." method="_on_ReloadTime_timeout"]

@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/map_and_nature/biome_3.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 160.0
+radius = 109.757
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {

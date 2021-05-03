@@ -72,6 +72,17 @@ func _physics_process(_delta):
 	if (self._status == 1):
 		if (self.position != _tmpPosBuilding):
 			rpc("stopBuildingAnimate")
+			var returnGold = 0
+			match _curBuildType:
+				0:
+					returnGold = _goldmine._cost
+				1:
+					returnGold = _barrack._cost
+				2:
+					returnGold = _tower._cost
+				3:
+					returnGold = _wall._cost
+			gain_gold(returnGold)
 			$buildProgress.visible = false
 			$BuildingTimer.stop()
 			self._status = 0
@@ -154,6 +165,9 @@ func _move(delta: float) -> Vector2:
 		#motion = puppet_motion
 	return motion
 
+func set_colorFromKingdom(colorString):
+	$Sprite.set_modulate(Color(colorString))
+	$AnimatedSprite.set_modulate(Color(colorString))
 
 func _isBuildWallAvailable():
 	var tmp = $direction/buildWallArea.get_overlapping_bodies()
@@ -167,6 +181,7 @@ sync func setup_Construction(pos, rot, type, peerID, constructID):
 		construction = _wall.duplicate()
 		construction.rotation = rot
 		construction.set_name("wall"+String(constructID))
+		
 	else :
 		match type:
 			0:
@@ -193,6 +208,10 @@ sync func setup_Construction(pos, rot, type, peerID, constructID):
 		_minePoint.set_contruction(construction)
 	construction.position = pos
 	construction.set_network_master(peerID)
+	if is_network_master():
+		construction.set_colorFromKing(gamestate.player_info.colorString)
+	else:
+		construction.set_colorFromKing(gamestate.players[peerID].colorString)
 	#print("set construction peer= " +String(peerID))
 	get_node("../Construction").add_child(construction)
 	pass
@@ -257,12 +276,12 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 	pass
 
 sync func startBuildingAnimate():
-	$AnimationPlayer.play("build")
+	$AnimationBuilding.play("build")
 	pass
 
 sync func stopBuildingAnimate():
-	$AnimationPlayer.stop()
-	$AnimationPlayer.seek(0, true)
+	$AnimationBuilding.stop()
+	$AnimationBuilding.seek(0, true)
 	pass
 
 func _on_BuildingTimer_timeout():
@@ -316,7 +335,9 @@ func _on_minePoint_area_exited(area):
 	pass # Replace with function body.
 
 func damaged(dam):
-	$blood_effect.emitting = true
+	if not $AnimationBleeding.is_playing():
+		$blood_effect.restart()
+		$AnimationBleeding.play("bleeding")
 	self._hp -= dam
 	pass
 

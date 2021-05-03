@@ -2,6 +2,7 @@ class_name Kingdom extends Node2D
 
 var _mainTarget = null
 var _networkID
+var colorString : String
 
 func _ready():
 	_networkID = get_tree().get_network_unique_id()
@@ -23,6 +24,10 @@ func _process(delta):
 
 func set_player_name(new_name):
 	$king/Label.set_text(new_name)
+
+func set_player_color(colorString : String):
+	self.colorString = colorString
+	$king.set_colorFromKingdom(colorString)
 
 func calculateClosestEnemy():
 	var min_dis = 100000

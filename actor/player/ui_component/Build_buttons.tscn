@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/ui/WOODbox.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/ui/ui_bar2.png" type="Texture" id=1]
 [ext_resource path="res://actor/player/ui_component/Build_buttons.gd" type="Script" id=2]
 [ext_resource path="res://assets/icon/barack_icon.png" type="Texture" id=3]
 [ext_resource path="res://assets/icon/wall_icon.png" type="Texture" id=4]
@@ -11,10 +11,11 @@
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -320.0
-margin_right = -107.0
-margin_bottom = -360.0
-rect_scale = Vector2( 1.5, 1.5 )
+margin_left = -160.0
+margin_top = 518.0
+margin_right = -80.0
+margin_bottom = -279.0
+rect_scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -135,6 +136,7 @@ texture_normal = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="button_up" from="listButton/buildGoldMine" to="." method="_on_buildGoldMine_button_up"]
 [connection signal="button_up" from="listButton/buildBarrack" to="." method="_on_buildBarrack_button_up"]
 [connection signal="button_up" from="listButton/buildTower" to="." method="_on_buildTower_button_up"]

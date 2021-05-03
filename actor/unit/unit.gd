@@ -24,8 +24,10 @@ func checkAlive():
 		rpc("destroyed")
 
 func damaged(dam):
-	if (self.get_node("blood_effect") != null):
-		self.get_node("blood_effect").emitting = true
+	if (self.has_node("AnimationBlooding")):
+		if not $AnimationBlooding.is_playing():
+			$blood_effect.restart()
+			$AnimationBlooding.play("bleeding")
 	self._hp -= dam
 	pass
 

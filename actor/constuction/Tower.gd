@@ -63,7 +63,6 @@ func get_ClosestEnemy_inRange():
 		var closestBody : PhysicsBody2D = null
 		var minDist = 10000
 		
-		
 		#print("listBodyInRange size = " + String(listBodyInRange.size()))
 		for body in listBody:
 #			print("peer=====")

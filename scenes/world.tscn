@@ -1,66 +1,116 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://actor/object/battle_field/MinePoint.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/map_and_nature/glassMap.png" type="Texture" id=2]
+[ext_resource path="res://actor/object/nature/glassMap.tscn" type="PackedScene" id=2]
 
 [node name="World" type="YSort"]
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="0" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 128, 128 )
+position = Vector2( 448, 383.285 )
 
 [node name="1" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 128, 1920 )
+position = Vector2( 752, 1672 )
 
 [node name="2" type="Position2D" parent="SpawnPoints"]
 position = Vector2( 3088, 1920 )
 
 [node name="3" type="Position2D" parent="SpawnPoints"]
-position = Vector2( 3008, 136 )
+position = Vector2( 3464, 272 )
 
 [node name="mine_points" type="Node2D" parent="."]
 
 [node name="minePoint" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 320, 576 )
+position = Vector2( 240, 312 )
 
 [node name="minePoint2" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 2112, 1744 )
+position = Vector2( 3392, 856 )
 
 [node name="minePoint3" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 920, 1016 )
+position = Vector2( 344, 651.404 )
 
 [node name="minePoint4" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 1640, 208 )
+position = Vector2( 744, 544 )
 
 [node name="minePoint5" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 2720, 1336 )
+position = Vector2( 3080, 760 )
+
+[node name="minePoint18" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 2848, 1504 )
+
+[node name="minePoint19" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 3200, 1560 )
+
+[node name="minePoint20" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 2672, 1880 )
+
+[node name="minePoint22" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 2496, 1609.78 )
+
+[node name="minePoint23" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 2368, 1240 )
+
+[node name="minePoint21" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 3416, 1830.22 )
 
 [node name="minePoint6" parent="mine_points" instance=ExtResource( 1 )]
 position = Vector2( 192, 1512 )
 
 [node name="minePoint7" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 2496, 232 )
+position = Vector2( 3080, 216 )
 
 [node name="minePoint8" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 1680, 1336 )
+position = Vector2( 2912, 488 )
 
 [node name="minePoint9" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 2776, 656 )
+position = Vector2( 3320, 496 )
 
 [node name="minePoint10" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 1960, 800 )
+position = Vector2( 976, 168 )
 
 [node name="minePoint11" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 968, 296 )
+position = Vector2( 632, 168 )
 
 [node name="minePoint12" parent="mine_points" instance=ExtResource( 1 )]
-position = Vector2( 1032, 1584 )
+position = Vector2( 480, 1688 )
+
+[node name="minePoint14" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 632, 1976 )
+
+[node name="minePoint15" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1056, 1752 )
+
+[node name="minePoint16" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 936, 1424 )
+
+[node name="minePoint24" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1520, 1568 )
+
+[node name="minePoint29" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1960, 1168 )
+
+[node name="minePoint25" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1536, 1016 )
+
+[node name="minePoint30" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1728, 344 )
+
+[node name="minePoint26" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 2256, 176 )
+
+[node name="minePoint27" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1987.18, 1800 )
+
+[node name="minePoint28" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 2368, 784 )
+
+[node name="minePoint17" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 1264, 688 )
+
+[node name="minePoint13" parent="mine_points" instance=ExtResource( 1 )]
+position = Vector2( 544, 1344 )
 
 [node name="kingdoms" type="Node2D" parent="."]
 
-[node name="glassMap" type="Sprite" parent="."]
-position = Vector2( 1926.25, 1081.25 )
-scale = Vector2( 3.41038, 3.37244 )
-z_index = -1
-texture = ExtResource( 2 )
+[node name="glassMap" parent="." instance=ExtResource( 2 )]
