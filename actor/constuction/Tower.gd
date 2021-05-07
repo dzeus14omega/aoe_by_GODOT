@@ -18,6 +18,7 @@ func _init():
 func _ready():
 	#print(get_network_master())
 	$healthBar.max_value = _hp
+	$AnimationConstruct.play("construct_finished")
 	#print($range.get_overlapping_bodies().size())
 	pass # Replace with function body.
 
@@ -69,13 +70,14 @@ func get_ClosestEnemy_inRange():
 #			print(body.get_network_master())
 #			print(self.get_network_master())
 #			print("object")
-#			print(body)
+			#print(body.name)
 			if body.get_network_master() != self.get_network_master():
 				#print("true")
-				var dist = body.global_position.distance_to(self.global_position)
-				if dist < minDist and dist > 0:
-					minDist = dist
-					closestBody = body
+				if (body.name != "mapCollision"):
+					var dist = body.global_position.distance_to(self.global_position)
+					if dist < minDist and dist > 0:
+						minDist = dist
+						closestBody = body
 			else:
 				#print("false")
 				pass

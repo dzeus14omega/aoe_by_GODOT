@@ -95,8 +95,8 @@ func _on_connection_failed():
 	$Connect/Join.visible = true
 	$Connect/ErrorLabel.set_text("Connection failed.")
 
-
 func _on_game_ended():
+	get_tree().get_network_peer().close_connection(200)
 	show()
 	$Connect.show()
 	$Players.hide()
@@ -133,9 +133,10 @@ func refresh_colorPane():
 		button.disabled = false
 	
 	for other_playerInfo in gamestate.players:
-		#print(gamestate.players[other_playerInfo].colorId)
-		$ColorPane/GridContainer.get_node(gamestate.players[other_playerInfo].colorId).disabled = true
-		gamestate.players[other_playerInfo].colorString = $ColorPane/GridContainer.get_node(gamestate.players[other_playerInfo].colorId).modulate.to_html(false)
+		if gamestate.players[other_playerInfo].colorId != "":
+			#print(gamestate.players[other_playerInfo].colorId)
+			$ColorPane/GridContainer.get_node(gamestate.players[other_playerInfo].colorId).disabled = true
+			gamestate.players[other_playerInfo].colorString = $ColorPane/GridContainer.get_node(gamestate.players[other_playerInfo].colorId).modulate.to_html(false)
 		#$ColorPane/GridContainer/color1.modulate.to_html(false)
 	
 	#set default color for new player connected
@@ -157,8 +158,6 @@ func _on_start_released():
 
 func _on_Leave_pressed():
 	gamestate.end_game()
-	get_tree().get_network_peer().close_connection(200)
-	
 	pass # Replace with function body.
 
 func _on_Color_selected():
@@ -168,8 +167,6 @@ func _on_BackMenu_pressed():
 	reset_colorPane()
 	get_tree().change_scene("res://scenes/mainMenu.tscn")
 	pass # Replace with function body.
-
-
 
 #===========================Button Control======================================
 func _on_color1_button_down():

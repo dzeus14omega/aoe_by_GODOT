@@ -27,6 +27,7 @@ var current_anim = ""
 var outFit 
 var _current_gold = 200
 
+
 #build control
 var _tmpPosBuilding := Vector2(0,0)
 var _curBuildType : int
@@ -35,6 +36,12 @@ var _status : int = 0  #0: normal  1: building
 ## barrack manage var
 var MAX_BARRACKCOUNT = 7
 var cur_construction_id = 0
+
+#Log final Results
+var _total_gold = _current_gold
+var _total_construction = 0
+var _total_armyUnit = 0
+var _total_pointHold = 0
 
 func _ready():
 	$healthBar.max_value = _hp
@@ -56,10 +63,18 @@ func _ready():
 		
 		main_ui.get_node("status/gold_amount").set_text(String(_current_gold))
 
+func game_Victory():
+	set_physics_process(false)
+	gamestate.set_GameFinalResult_and_show(true, _total_construction, _total_armyUnit, _total_gold, _total_pointHold)
+	get_parent().destroy_All()
+	rpc("destroyed")
+	pass
+
 func _physics_process(_delta):
-#	if self._hp <= 0 and is_network_master():
-#		rpc("destroyed")
-		
+	if self._hp <= 0 and is_network_master():
+		gamestate.set_GameFinalResult_and_show(false, _total_construction, _total_armyUnit, _total_gold, _total_pointHold)
+		get_parent().destroy_All()
+		rpc("destroyed")
 #	if self._hp <= 0:
 #		self.hide()
 #		if is_network_master():
@@ -67,7 +82,7 @@ func _physics_process(_delta):
 #			return
 #		else:
 #			return
-	
+
 	#cancel building
 	if (self._status == 1):
 		if (self.position != _tmpPosBuilding):
@@ -82,6 +97,10 @@ func _physics_process(_delta):
 					returnGold = _tower._cost
 				3:
 					returnGold = _wall._cost
+			
+			#roll back gold refefund for total gold
+			self._total_gold -= returnGold
+			
 			gain_gold(returnGold)
 			$buildProgress.visible = false
 			$BuildingTimer.stop()
@@ -315,7 +334,7 @@ func _on_timeBuildingUpdate(total_time):
 func _on_minePoint_area_entered(area):
 #	if is_network_master():
 	if (area is MinePoint):
-		if area.construction == null or area.construction.get_parent().get_parent() == self.get_parent():
+		if area.construction == null || area.construction.get_parent().get_parent() == self.get_parent():
 			#print("enter mine point")
 			_minePoint = area
 			if is_network_master():
@@ -349,6 +368,7 @@ sync func destroyed():
 #currency management
 func gain_gold(amountOfGold):
 	self._current_gold += amountOfGold
+	self._total_gold += amountOfGold
 	$UI/status/gold_amount.set_text(String(checkGoldLeft()))
 	pass
 

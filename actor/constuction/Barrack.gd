@@ -103,6 +103,11 @@ sync func setup_unit(unitID, pos, peerID, idUnit):
 	new_unit.set_name(self.get_name() + String(idUnit))
 	new_unit.set_network_master(peerID)
 	
+	if is_network_master():
+		new_unit.set_colorFromKing(gamestate.player_info.colorString)
+	else:
+		new_unit.set_colorFromKing(gamestate.players[peerID].colorString)
+	
 	get_node("../../Army").add_child(new_unit)
 	pass
 

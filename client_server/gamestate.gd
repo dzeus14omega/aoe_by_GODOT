@@ -13,7 +13,14 @@ var player_info = PlayerInfo.new()
 # Names for remote players in id:name format.
 var players = {}
 var players_ready = []
-#var colerDisable = []
+
+#GameResult:
+var gameFinalResult : String   ## Victory / Defeated
+var total_construction : int = 0 
+var total_unitTrain : int = 0
+var total_goldEarn : int = 0
+var total_pointHold : int = 0
+
 
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
@@ -31,11 +38,14 @@ func _player_connected(id):
 
 # Callback from SceneTree.
 func _player_disconnected(id):
-	if has_node("/root/World"): # Game is in progress.
-		if get_tree().is_network_server():
-			emit_signal("game_error", "Player " + players[id] + " disconnected")
-			end_game()
-	else: # Game is not in progress.
+	if has_node("/root/World/kingdoms"): # Game is in progress.
+		if get_tree().get_root().get_node("World/kingdoms").get_node(str(id)).has_node("king"):
+			if get_tree().is_network_server():
+				emit_signal("game_error", "Player " + str(id) + " disconnected")
+				end_game()
+		else:
+			get_tree().get_root().get_node("World/kingdoms").get_node(str(id)).queue_free()
+	else: # Game is not in progress
 		# Unregister this player.
 		unregister_player(id)
 
@@ -187,5 +197,24 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
-	
-	
+
+func reset_GameResult():
+	self.total_construction = 0
+	self.total_goldEarn = 0
+	self.total_unitTrain = 0
+	self.total_pointHold = 0
+	self.gameFinalResult = ""
+	pass
+
+func set_GameFinalResult_and_show(isWin, total_construction, total_unitTrain, total_goldEarn, total_pointHold):
+	if (isWin):
+		self.gameFinalResult = "Victory"
+	else:
+		self.gameFinalResult = "Defeated"
+		
+	self.total_construction = total_construction
+	self.total_goldEarn = total_goldEarn
+	self.total_unitTrain = total_unitTrain
+	self.total_pointHold = total_pointHold
+	get_tree().get_root().get_node("World/EndingSceneUI/EndingScene/AnimationEndScene").play("EndingAppear")
+	pass

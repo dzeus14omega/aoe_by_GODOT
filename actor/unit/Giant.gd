@@ -102,7 +102,7 @@ func _find_closestEnemy():
 	var minDist = 10000;
 	
 	for body in bodies:
-		if body.get_network_master() != self.get_network_master() and body is PhysicsBody2D:
+		if body.get_network_master() != self.get_network_master() and body is PhysicsBody2D and body.name != "mapCollision":
 			var dist = self.global_position.distance_to(body.global_position)
 			if dist < minDist:
 				minDist = dist

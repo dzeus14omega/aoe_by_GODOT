@@ -15,12 +15,24 @@ func _process(delta):
 		set_process(false)
 		#TODO: play lost animation
 		#...
-		
 		return
+		
 	if is_network_master():
+		if (check_winCondition()):
+			$king.game_Victory()
+			set_process(false)
 		calculateClosestEnemy()
 		#print(_mainTarget)
 	pass
+
+func check_winCondition() -> bool:
+	if get_parent() != null:
+		for kingdom in get_parent().get_children() :
+			#print(str(kingdom.name) + " " + str(self.name))
+			if kingdom.name != self.name :
+				if kingdom.has_node("king"):
+					return false
+	return true
 
 func set_player_name(new_name):
 	$king/Label.set_text(new_name)
@@ -42,7 +54,16 @@ func calculateClosestEnemy():
 	if tmp_targetKingdom != null:
 		_mainTarget = tmp_targetKingdom.get_node("king")
 	pass
-	
+
+func destroy_All():
+	for unit in $Army.get_children():
+		if (unit.has_method("force_Kill")):
+			unit.force_Kill()
+	for construct in $Construction.get_children():
+		if (construct.has_method("force_Destroy")):
+			construct.force_Destroy()
+	pass
+
 func get_mainTarget():
 	return _mainTarget
 

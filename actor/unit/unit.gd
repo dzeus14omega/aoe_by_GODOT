@@ -23,6 +23,10 @@ func checkAlive():
 	if self._hp <= 0 and is_network_master():
 		rpc("destroyed")
 
+func force_Kill():
+	if is_network_master():
+		rpc("destroyed")
+
 func damaged(dam):
 	if (self.has_node("AnimationBlooding")):
 		if not $AnimationBlooding.is_playing():
@@ -30,6 +34,10 @@ func damaged(dam):
 			$AnimationBlooding.play("bleeding")
 	self._hp -= dam
 	pass
+
+func set_colorFromKing(_colorString : String):
+	if (self.has_node("sprite")):
+		$sprite.set_modulate(Color(_colorString))
 
 sync func destroyed():
 	queue_free()

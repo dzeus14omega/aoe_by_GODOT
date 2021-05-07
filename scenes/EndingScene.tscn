@@ -1,0 +1,285 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/ui/btn_back.png" type="Texture" id=1]
+[ext_resource path="res://scenes/EndingScene.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/ui_bar1_align.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/info_bar.png" type="Texture" id=4]
+[ext_resource path="res://font_style/Amatic-Bold.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 75
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 60
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "EndingAppear"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("StatBoard:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StatBoard:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 474, 480 ), Vector2( 474, 198 ), Vector2( 474, 198 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TitleEnd:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 776, -132 ), Vector2( 776, 40 ), Vector2( 776, 40 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TitleEnd:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "update_TitleEnd"
+}, {
+"args": [  ],
+"method": "update_totalConstruction"
+}, {
+"args": [  ],
+"method": "update_totalUnitTrain"
+}, {
+"args": [  ],
+"method": "update_totalGoldEarn"
+}, {
+"args": [  ],
+"method": "update_totalPointHold"
+} ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="EndingSceneUI" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="EndingScene" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="EndingScene"]
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 344.0
+margin_bottom = 152.0
+texture_normal = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleEnd" type="TextureRect" parent="EndingScene"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 776.0
+margin_top = -132.0
+margin_right = -776.0
+margin_bottom = -1084.01
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="EndingScene/TitleEnd"]
+margin_left = 32.0
+margin_top = 8.0
+margin_right = 345.0
+margin_bottom = 152.0
+custom_fonts/font = SubResource( 1 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatBoard" type="TextureRect" parent="EndingScene"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 474.0
+margin_top = 480.0
+margin_right = -478.0
+margin_bottom = 96.0007
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "dd"
+}
+
+[node name="result" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 232.0
+margin_top = 96.0
+margin_right = 736.0
+margin_bottom = 177.0
+custom_fonts/font = SubResource( 2 )
+text = "Your Results"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="total_constructionLabel" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 161.0
+margin_top = 226.0
+margin_right = 673.0
+margin_bottom = 291.0
+rect_pivot_offset = Vector2( 277, 34 )
+custom_fonts/font = SubResource( 3 )
+text = "Total construction:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="total_construction" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 675.0
+margin_top = 228.0
+margin_right = 803.0
+margin_bottom = 293.0
+rect_pivot_offset = Vector2( -179, 74 )
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="total_unitTrainedLabel" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 158.0
+margin_top = 303.0
+margin_right = 670.0
+margin_bottom = 368.0
+rect_pivot_offset = Vector2( 277, 34 )
+custom_fonts/font = SubResource( 3 )
+text = "Total Unit Trained:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="total_unitTrained" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 676.0
+margin_top = 305.0
+margin_right = 804.0
+margin_bottom = 370.0
+rect_pivot_offset = Vector2( -179, 74 )
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="total_goldLabel" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 161.0
+margin_top = 379.0
+margin_right = 673.0
+margin_bottom = 444.0
+custom_fonts/font = SubResource( 3 )
+text = "Total gold earn:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="total_gold" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 678.0
+margin_top = 384.0
+margin_right = 806.0
+margin_bottom = 449.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="max_pointHoldLabel" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 161.0
+margin_top = 454.0
+margin_right = 673.0
+margin_bottom = 519.0
+custom_fonts/font = SubResource( 3 )
+text = "Max point holding:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="max_pointHold" type="Label" parent="EndingScene/StatBoard"]
+margin_left = 676.0
+margin_top = 456.0
+margin_right = 804.0
+margin_bottom = 521.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationEndScene" type="AnimationPlayer" parent="EndingScene"]
+anims/EndingAppear = SubResource( 4 )
+
+[connection signal="button_up" from="EndingScene/BackButton" to="." method="_on_BackButton_button_up"]

@@ -9,7 +9,7 @@ func _ready():
 
 func set_contruction(_construction):
 	$biome_animated.visible = false
-	
+	_construction.positionPoint = self
 	if self.construction == null:
 		self.construction = _construction
 	else:

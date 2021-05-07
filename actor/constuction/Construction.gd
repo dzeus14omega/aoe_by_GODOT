@@ -4,6 +4,7 @@ var _hp
 var _buildTime
 var _cost
 var _colorString = "ffffff"
+var positionPoint : MinePoint = null
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -24,11 +25,16 @@ func destruction():
 	pass
 
 sync func destroy():
+	positionPoint.construction = null
 	queue_free()
 	pass
 
 func checkExist():
 	if self._hp <= 0 and is_network_master():
+		rpc("destroy")
+
+func force_Destroy():
+	if is_network_master():
 		rpc("destroy")
 
 func getBuildTime():
