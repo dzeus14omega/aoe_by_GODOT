@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hammer_sound.mp3-2315b97750582a3745cff4d55fd01ac4.mp3str"
+
+[deps]
+
+source_file="res://assets/sound_effect/actor/hammer_sound.mp3"
+dest_files=[ "res://.import/hammer_sound.mp3-2315b97750582a3745cff4d55fd01ac4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

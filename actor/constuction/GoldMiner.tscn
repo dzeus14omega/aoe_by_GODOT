@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://actor/constuction/GoldMiner.gd" type="Script" id=1]
 [ext_resource path="res://assets/construction/goldmine.png" type="Texture" id=2]
+[ext_resource path="res://actor/unit/animation_and_effect/healthBar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 48.0
@@ -17,15 +18,7 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="healthBar" type="ProgressBar" parent="."]
-visible = false
-margin_left = -40.0
-margin_top = -56.0
-margin_right = 40.0
-margin_bottom = -42.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="mining_cooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="healthBar" parent="." instance=ExtResource( 3 )]

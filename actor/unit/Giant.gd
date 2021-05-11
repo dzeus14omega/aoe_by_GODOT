@@ -1,7 +1,6 @@
 class_name Giant extends Unit
 
 var main_target = null
-var state_command : int = 0  #0:attack  1:defense
 
 var _direction : Vector2
 #puppet control
@@ -9,7 +8,8 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_rotation = 0
 
 #for instance in trainButton
-func init():
+func init(mKing):
+	.init(mKing)
 	self._trainTime = 10
 	self._cost = 150
 	self._speed = 140
@@ -51,7 +51,7 @@ func _process(delta):
 			main_target = get_parent().get_parent().get_mainTarget()
 		#print(main_target)
 		
-		if (main_target != null):
+		if (is_instance_valid(main_target)):
 			_rotate_to_mainTarget()
 			if state_command == 0:
 				_move_to_main_Target()
@@ -73,7 +73,7 @@ func _process(delta):
 	
 	
 	# attack main target if getting close
-	if main_target != null and is_network_master():
+	if is_instance_valid(main_target) and is_network_master():
 		var disToTarget = self.global_position.distance_to(main_target.global_position)
 		#print(disToTarget)
 		if disToTarget < 150:
@@ -85,14 +85,15 @@ func _process(delta):
 	pass
 
 func _rotate_to_mainTarget():
-	$direction.look_at(main_target.global_position)
-	var motion = Vector2(main_target.global_position.x - self.global_position.x, main_target.global_position.y - self.global_position.y)
-	motion = motion.normalized()
-	self._direction = motion
+	if (is_instance_valid(main_target)):
+		$direction.look_at(main_target.global_position)
+		var motion = Vector2(main_target.global_position.x - self.global_position.x, main_target.global_position.y - self.global_position.y)
+		motion = motion.normalized()
+		self._direction = motion
 	pass
 
 func _move_to_main_Target():
-	if main_target != null:
+	if is_instance_valid(main_target):
 		move_and_slide(self._direction * _speed)
 	pass
 

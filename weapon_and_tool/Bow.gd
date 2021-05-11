@@ -13,9 +13,10 @@ func _ready():
 	pass # Replace with function body.
 
 
-func shoot(direction, peerID):
+func shoot(direction, peerID, arrowID):
 	var arrow = _arrow.instance()
 	arrow.init(damage)
+	arrow.set_name(self.get_name() + String(arrowID))
 	arrow.set_network_master(peerID)
 	get_node("arrow_patch").add_child(arrow)
 	self._arrow_onLoad = arrow

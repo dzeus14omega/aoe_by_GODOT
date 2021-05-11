@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/swords_hit.mp3-2177079251a41555a8098bb56771ad5f.mp3str"
+
+[deps]
+
+source_file="res://assets/sound_effect/actor/swords_hit.mp3"
+dest_files=[ "res://.import/swords_hit.mp3-2177079251a41555a8098bb56771ad5f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

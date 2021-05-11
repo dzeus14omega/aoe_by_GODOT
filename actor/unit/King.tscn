@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://actor/unit/King.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://assets/character/king1.png" type="Texture" id=11]
 [ext_resource path="res://font_style/Amatic-Bold.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://assets/character/shadow.png" type="Texture" id=13]
+[ext_resource path="res://actor/unit/animation_and_effect/healthBar.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/ui/clockwise_bar.png" type="Texture" id=15]
+[ext_resource path="res://assets/sound_effect/actor/hammer_sound.mp3" type="AudioStream" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -37,11 +40,7 @@ size = 50
 font_data = ExtResource( 12 )
 
 [sub_resource type="Animation" id=6]
-resource_name = "bleed"
-length = 0.8
-
-[sub_resource type="Animation" id=7]
-length = 0.5
+length = 1.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("direction/Position2D:rotation_degrees")
@@ -50,13 +49,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5 ),
-"transitions": PoolRealArray( 2.21914, 0.5, 1 ),
+"times": PoolRealArray( 0, 0.201, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 2.21914, 1, 1, 0.5, 1, 0.5, 1, 2.21914 ),
 "update": 0,
-"values": [ 0.0, 60.0, 0.0 ]
+"values": [ 0.0, 24.0, 0.0, 60.0, 0.0, 60.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "bleeding"
 length = 0.8
 tracks/0/type = "value"
@@ -155,35 +154,35 @@ __meta__ = {
 wait_time = 3.0
 one_shot = true
 
-[node name="buildProgress" type="ProgressBar" parent="."]
+[node name="buildProgress" type="TextureProgress" parent="."]
 visible = false
-margin_left = -40.0
-margin_top = 24.0
-margin_right = 41.0
-margin_bottom = 40.0
+margin_left = 40.0
+margin_top = -104.0
+margin_right = 148.0
+margin_bottom = 4.0
+rect_scale = Vector2( 0.5, 0.5 )
+step = 0.05
+texture_under = ExtResource( 15 )
+texture_progress = ExtResource( 15 )
+fill_mode = 4
+tint_under = Color( 0, 0, 0, 0.188235 )
+tint_progress = Color( 0.921569, 0.862745, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="healthBar" type="ProgressBar" parent="."]
-visible = false
-margin_left = -56.0
-margin_top = -72.0
-margin_right = 56.0
-margin_bottom = -56.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="healthBar" parent="." instance=ExtResource( 14 )]
 
 [node name="AnimationBuilding" type="AnimationPlayer" parent="."]
-anims/bleed = SubResource( 6 )
-anims/build = SubResource( 7 )
+anims/build = SubResource( 6 )
 
 [node name="AnimationBleeding" type="AnimationPlayer" parent="."]
-anims/bleeding = SubResource( 8 )
+anims/bleeding = SubResource( 7 )
 
 [node name="blood_effect" parent="." instance=ExtResource( 5 )]
+
+[node name="building_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
 
 [connection signal="area_entered" from="direction/buildArea" to="." method="_on_minePoint_area_entered"]
 [connection signal="area_exited" from="direction/buildArea" to="." method="_on_minePoint_area_exited"]

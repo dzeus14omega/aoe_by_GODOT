@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/tool_and_weapon/sword.png" type="Texture" id=1]
 [ext_resource path="res://weapon_and_tool/ShortSword.gd" type="Script" id=2]
+[ext_resource path="res://assets/sound_effect/actor/sword_glave_sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sound_effect/actor/swords_hit.mp3" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.99988
@@ -36,6 +38,18 @@ tracks/1/keys = {
 "method": "dealDamage"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("sound_attack_slave:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, false ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "slash_stab"
@@ -47,10 +61,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.7 ),
+"transitions": PoolRealArray( 2.21914, 0.210224, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 25, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -10, 0 ), Vector2( 25, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -59,12 +73,24 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "dealDamage"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("sound_attack_stab:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, false ]
 }
 
 [node name="shortSword" type="Area2D"]
@@ -84,5 +110,12 @@ shape = SubResource( 1 )
 [node name="slash_atk" type="AnimationPlayer" parent="."]
 anims/slash_rounnd = SubResource( 2 )
 anims/slash_stab = SubResource( 3 )
+
+[node name="sound_attack_slave" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="sound_attack_stab" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
 [connection signal="body_entered" from="." to="." method="_on_shortSword_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_shortSword_body_exited"]

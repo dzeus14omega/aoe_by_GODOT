@@ -3,6 +3,7 @@ class_name Kingdom extends Node2D
 var _mainTarget = null
 var _networkID
 var colorString : String
+#var state_command : int
 
 func _ready():
 	_networkID = get_tree().get_network_unique_id()
@@ -71,5 +72,8 @@ func get_networkID():
 	return _networkID
 
 func setOrderCommand(state):
+	#state_command = state
+	$king.set_command_State(state)
+	
 	#print("command change" + str(state))
 	pass

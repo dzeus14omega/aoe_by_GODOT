@@ -15,10 +15,6 @@ var giant = preload("res://actor/unit/Giant.tscn").instance()
 var link_trainButton
 
 func _init():
-	soldier.init()
-	archer.init()
-	giant.init()
-	
 	self._hp = 300
 	self._buildTime = 3
 	self._cost = 100
@@ -33,6 +29,10 @@ func _ready():
 		if _mKing.get_node("UI") != null:
 			_mKing.get_node("UI").get_node("tacticalControl").addButtonTrain(self)
 		pass
+	
+#	soldier.init(_mKing)
+#	archer.init(_mKing)
+#	giant.init(_mKing)
 	
 	$healthBar.max_value = _hp
 	#print(maxTrainAmount)
@@ -102,11 +102,13 @@ sync func setup_unit(unitID, pos, peerID, idUnit):
 	new_unit.position = pos
 	new_unit.set_name(self.get_name() + String(idUnit))
 	new_unit.set_network_master(peerID)
+	new_unit.init(_mKing)
+	new_unit.set_colorFromKing(self._colorString)
 	
-	if is_network_master():
-		new_unit.set_colorFromKing(gamestate.player_info.colorString)
-	else:
-		new_unit.set_colorFromKing(gamestate.players[peerID].colorString)
+#	if is_network_master():
+#		new_unit.set_colorFromKing(gamestate.player_info.colorString)
+#	else:
+#		new_unit.set_colorFromKing(gamestate.players[peerID].colorString)
 	
 	get_node("../../Army").add_child(new_unit)
 	pass

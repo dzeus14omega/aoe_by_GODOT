@@ -7,6 +7,7 @@ var curent_enemy
 #var listBodyInRange = []
 
 var _bullet = preload("res://actor/constuction/construction_assets/Bullet.tscn")
+var _bulletID = 0
 
 func _init():
 	self._hp = 400
@@ -16,11 +17,15 @@ func _init():
 
 
 func _ready():
+	set_process(false)
 	#print(get_network_master())
 	$healthBar.max_value = _hp
 	$AnimationConstruct.play("construct_finished")
 	#print($range.get_overlapping_bodies().size())
 	pass # Replace with function body.
+
+func start_Process():
+	set_process(true)
 
 func _process(delta):
 	.checkExist()
@@ -41,8 +46,8 @@ func _process(delta):
 				direction = direction.normalized()
 				#print(direction)
 				#print(curent_enemy)
-				rpc("shoot", direction, get_network_master())
-				
+				rpc("shoot", direction, get_network_master(), _bulletID)
+				_bulletID += 1
 				loading_statement = 1 
 				$ReloadTime.set_wait_time(timePerHit)
 				$ReloadTime.start()
@@ -84,9 +89,11 @@ func get_ClosestEnemy_inRange():
 		return closestBody
 
 
-sync func shoot(direction : Vector2, peerID):
+sync func shoot(direction : Vector2, peerID, bulletID):
+	$sound_attack.play(0)
 	var bullet = _bullet.instance()
 	bullet.init(direction, self.global_position, tower_dam, 1.2)
+	bullet.set_name(self.get_name() + String(bulletID))
 	bullet.set_network_master(peerID)
 	#print(bullet)
 	#print(bullet.get_network_master())

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/character/archer.png" type="Texture" id=1]
 [ext_resource path="res://actor/unit/Archer.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/character/archer1.png" type="Texture" id=6]
 [ext_resource path="res://assets/character/archer2.png" type="Texture" id=7]
 [ext_resource path="res://assets/character/shadow.png" type="Texture" id=8]
+[ext_resource path="res://actor/unit/animation_and_effect/healthBar.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -83,17 +84,6 @@ shape = SubResource( 3 )
 
 [node name="attack_cooldown" type="Timer" parent="."]
 
-[node name="healthBar" type="ProgressBar" parent="."]
-visible = false
-margin_left = -32.0
-margin_top = -56.0
-margin_right = 32.0
-margin_bottom = -40.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="direction" type="Node2D" parent="."]
 
 [node name="bow" parent="direction" instance=ExtResource( 3 )]
@@ -102,3 +92,10 @@ __meta__ = {
 anims/bleeding = SubResource( 4 )
 
 [node name="blood_effect" parent="." instance=ExtResource( 4 )]
+
+[node name="healthBar" parent="." instance=ExtResource( 9 )]
+margin_left = -27.5
+margin_top = -56.0
+margin_right = 193.5
+margin_bottom = -19.0
+rect_scale = Vector2( 0.247322, 0.44 )

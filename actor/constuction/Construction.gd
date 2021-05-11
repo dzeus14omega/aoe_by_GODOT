@@ -14,7 +14,8 @@ var positionPoint : MinePoint = null
 func _ready():
 	pass # Replace with function body.
 
-func set_colorFromKing(_colorString : String):
+func set_colorFromKing(colorString : String):
+	self._colorString = colorString
 	if (self.has_node("Sprite")):
 		$Sprite.set_modulate(Color(_colorString))
 
@@ -25,7 +26,8 @@ func destruction():
 	pass
 
 sync func destroy():
-	positionPoint.construction = null
+	if (positionPoint != null):  # for construction is wall
+		positionPoint.construction = null
 	queue_free()
 	pass
 

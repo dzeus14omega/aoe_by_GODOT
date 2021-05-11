@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/tool_and_weapon/ironPunch.png" type="Texture" id=1]
 [ext_resource path="res://weapon_and_tool/IronPunch.gd" type="Script" id=2]
+[ext_resource path="res://assets/sound_effect/actor/punch.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 24.0
@@ -47,6 +48,18 @@ tracks/2/keys = {
 "method": "dealDamage"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("sound_attack:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, false ]
+}
 
 [node name="ironPunch" type="Area2D"]
 script = ExtResource( 2 )
@@ -81,5 +94,9 @@ offset = Vector2( -288.606, 1049.16 )
 
 [node name="punch_attack" type="AnimationPlayer" parent="."]
 anims/punch = SubResource( 2 )
+
+[node name="sound_attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
 [connection signal="body_entered" from="." to="." method="_on_ironPunch_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_ironPunch_body_exited"]

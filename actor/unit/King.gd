@@ -7,8 +7,10 @@ var joystick_move
 var speed = 250
 var rotationSpeed = 100
 var _minePoint
+var state_command : int = 0
 
 var _hp = 250
+var _colorString = "ffffff"
 #Preload var
 var ui = preload("res://actor/player/UI.tscn")
 
@@ -185,6 +187,7 @@ func _move(delta: float) -> Vector2:
 	return motion
 
 func set_colorFromKingdom(colorString):
+	self._colorString = colorString
 	$Sprite.set_modulate(Color(colorString))
 	$AnimatedSprite.set_modulate(Color(colorString))
 
@@ -227,10 +230,11 @@ sync func setup_Construction(pos, rot, type, peerID, constructID):
 		_minePoint.set_contruction(construction)
 	construction.position = pos
 	construction.set_network_master(peerID)
-	if is_network_master():
-		construction.set_colorFromKing(gamestate.player_info.colorString)
-	else:
-		construction.set_colorFromKing(gamestate.players[peerID].colorString)
+	construction.set_colorFromKing(self._colorString)
+#	if is_network_master():
+#		construction.set_colorFromKing(gamestate.player_info.colorString)
+#	else:
+#		construction.set_colorFromKing(gamestate.players[peerID].colorString)
 	#print("set construction peer= " +String(peerID))
 	get_node("../Construction").add_child(construction)
 	pass
@@ -296,10 +300,12 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 
 sync func startBuildingAnimate():
 	$AnimationBuilding.play("build")
+	$building_sound.play(0)
 	pass
 
 sync func stopBuildingAnimate():
 	$AnimationBuilding.stop()
+	$building_sound.stop()
 	$AnimationBuilding.seek(0, true)
 	pass
 
@@ -352,6 +358,12 @@ func _on_minePoint_area_exited(area):
 				$UI.lock_buildContruction()
 	
 	pass # Replace with function body.
+
+func set_command_State(state):
+	self.state_command = state
+
+func get_command_State():
+	return state_command
 
 func damaged(dam):
 	if not $AnimationBleeding.is_playing():
