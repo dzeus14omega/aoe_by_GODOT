@@ -46,8 +46,8 @@ func _process(delta):
 			$healthBar.value = self._hp
 	
 	#set value for main target
-	._process(delta)
 	if get_parent().is_network_master() and get_parent() != null:
+		._process(delta)
 		_find_closestEnemy()
 		if main_target ==null:
 			main_target = get_parent().get_parent().get_mainTarget()

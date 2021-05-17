@@ -191,10 +191,13 @@ func set_colorFromKingdom(colorString):
 	$Sprite.set_modulate(Color(colorString))
 	$AnimatedSprite.set_modulate(Color(colorString))
 
-func _isBuildWallAvailable():
+func isBuildWallAvailable():
 	var tmp = $direction/buildWallArea.get_overlapping_bodies()
 	if tmp.size() == 0:
+		if has_node("UI"):
+			$UI/build_buttons.buildWallAllow()
 		return true
+	$UI/build_buttons.buildWallDisable()
 	return false
 
 sync func setup_Construction(pos, rot, type, peerID, constructID):
@@ -244,7 +247,7 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 		
 		_curBuildType = type
 		if type == 3:
-			if _isBuildWallAvailable():
+			if isBuildWallAvailable():
 				if (spendGold_If_Possible(_wall._cost)):
 					#manage status
 					self._status = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://actor/player/UI.gd" type="Script" id=1]
 [ext_resource path="res://actor/player/ui_component/Build_buttons.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://font_style/Amatic-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://actor/player/ui_component/CommandOrder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/ui/woodbarupper.jpg" type="Texture" id=7]
+[ext_resource path="res://assets/ui/info_bar.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -40,27 +41,30 @@ margin_bottom = -181.0
 
 [node name="build_buttons" parent="." instance=ExtResource( 2 )]
 margin_left = -256.0
-margin_top = 360.0
+margin_top = 504.0
 margin_right = -128.0
-margin_bottom = -364.0
+margin_bottom = -292.0
 
 [node name="tacticalControl" parent="." instance=ExtResource( 4 )]
 margin_right = -1280.0
 margin_bottom = 128.0
 
-[node name="status" type="Control" parent="."]
+[node name="status" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 0.007
-margin_left = 1024.0
-margin_right = -512.0
-margin_bottom = 120.44
+margin_left = 968.0
+margin_right = -632.0
+margin_bottom = 112.44
+texture = ExtResource( 8 )
+expand = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_group_": true
 }
 
 [node name="Label" type="Label" parent="status"]
+margin_left = 32.0
 margin_top = 24.0
-margin_right = 94.0
+margin_right = 126.0
 margin_bottom = 167.0
 size_flags_stretch_ratio = 0.0
 custom_fonts/font = SubResource( 1 )
@@ -70,10 +74,10 @@ __meta__ = {
 }
 
 [node name="gold_amount" type="Label" parent="status"]
-margin_left = 118.692
-margin_top = 10.3476
-margin_right = 310.692
-margin_bottom = 97.3476
+margin_left = 112.0
+margin_top = 24.0
+margin_right = 280.0
+margin_bottom = 111.0
 custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

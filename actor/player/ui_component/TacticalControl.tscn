@@ -13,10 +13,8 @@ __meta__ = {
 }
 
 [node name="HScrollBar" type="ScrollContainer" parent="."]
-margin_left = 18.0
-margin_top = 22.0
-margin_right = 735.0
-margin_bottom = 142.0
+margin_right = 725.0
+margin_bottom = 195.0
 scroll_vertical_enabled = false
 scroll_deadzone = -20
 __meta__ = {

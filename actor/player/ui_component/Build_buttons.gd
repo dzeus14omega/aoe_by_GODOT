@@ -3,13 +3,11 @@ extends Control
 var output
 var parent
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	parent = self.get_parent().get_parent()
 	buildConstructionDisable()
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -29,15 +27,20 @@ func buildConstructionDisable():
 	$listButton/buildTower.disabled = true
 	pass
 
+func buildWallAllow():
+	$listButton/buildWall.disabled = false
+	pass
+
+func buildWallDisable():
+	$listButton/buildWall.disabled = true
+
 func _on_buildGoldMine_button_up():
 	parent.buildConstruction(0)
 	pass # Replace with function body.
 
-
 func _on_buildBarrack_button_up():
 	parent.buildConstruction(1)
 	pass # Replace with function body.
-
 
 func _on_buildTower_button_up():
 	parent.buildConstruction(2)

@@ -20,7 +20,8 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	state_command = _ownKing.get_command_State()
+	if _ownKing != null:
+		state_command = _ownKing.get_command_State()
 
 func getTrainTime():
 	return  _trainTime
