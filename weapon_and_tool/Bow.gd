@@ -24,7 +24,7 @@ func shoot(direction, peerID, arrowID):
 	pass
 
 func _push_arrow():
-	if _arrow_onLoad != null:
+	if is_instance_valid(_arrow_onLoad):
 		_arrow_onLoad.fly()
 		_arrow_onLoad = null
 	pass

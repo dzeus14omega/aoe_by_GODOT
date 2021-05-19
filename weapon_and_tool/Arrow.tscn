@@ -21,5 +21,6 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_arrow_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

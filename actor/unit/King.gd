@@ -67,14 +67,14 @@ func _ready():
 
 func game_Victory():
 	set_physics_process(false)
-	gamestate.set_GameFinalResult_and_show(true, _total_construction, _total_armyUnit, _total_gold, _total_pointHold)
+	gamestate.set_GameFinalResult_and_show(true, _total_construction, _total_armyUnit, _total_gold, get_parent().get_max_pointHolding())
 	get_parent().destroy_All()
 	rpc("destroyed")
 	pass
 
 func _physics_process(_delta):
 	if self._hp <= 0 and is_network_master():
-		gamestate.set_GameFinalResult_and_show(false, _total_construction, _total_armyUnit, _total_gold, _total_pointHold)
+		gamestate.set_GameFinalResult_and_show(false, _total_construction, _total_armyUnit, _total_gold, get_parent().get_max_pointHolding())
 		get_parent().destroy_All()
 		rpc("destroyed")
 #	if self._hp <= 0:
@@ -84,7 +84,7 @@ func _physics_process(_delta):
 #			return
 #		else:
 #			return
-
+	
 	#cancel building
 	if (self._status == 1):
 		if (self.position != _tmpPosBuilding):
@@ -128,6 +128,7 @@ func _physics_process(_delta):
 		_on_total_Building($BuildingTimer.time_left)
 	
 	if is_network_master():
+		isBuildWallAvailable()
 		if motion.x != 0 and motion.y != 0:
 			if motion.y ==0:
 				if motion.x <0:
@@ -247,24 +248,23 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 		
 		_curBuildType = type
 		if type == 3:
-			if isBuildWallAvailable():
-				if (spendGold_If_Possible(_wall._cost)):
-					#manage status
-					self._status = 1
-					
-					$BuildingTimer.wait_time = _wall.getBuildTime()
-					_on_timeBuildingUpdate($BuildingTimer.wait_time)
-					$buildProgress.visible = true
-					$BuildingTimer.start()
-					rpc("startBuildingAnimate")
-					_tmpPosBuilding = self.position
-				else:
-					#TODO: Warn by UI gold
-					pass
+			#if isBuildWallAvailable():
+			if (spendGold_If_Possible(_wall._cost)):
+				#manage status
+				self._status = 1
+				
+				$BuildingTimer.wait_time = _wall.getBuildTime()
+				_on_timeBuildingUpdate($BuildingTimer.wait_time)
+				$buildProgress.visible = true
+				$BuildingTimer.start()
+				rpc("startBuildingAnimate")
+				_tmpPosBuilding = self.position
 			else:
+				#TODO: Warn by UI gold
+				pass
+			#else:
 				#TODO: display wall_shadow red to warnning
 				
-				pass
 		else:
 			if _minePoint != null:
 				#manage number of barrack count
@@ -319,7 +319,7 @@ func _on_BuildingTimer_timeout():
 	if (self.position == _tmpPosBuilding):
 		#build wall
 		$buildProgress.visible = false
-		
+		_total_construction += 1
 		if _curBuildType == 3:
 			call_deferred("rpc", "setup_Construction",  $direction/buildWallArea.global_position, $direction.global_rotation, _curBuildType, get_network_master(), cur_construction_id)
 			#rpc("setup_Construction", $direction/buildWallArea.global_position, $direction.global_rotation, _curBuildType, get_network_master(), cur_construction_id)
@@ -397,3 +397,6 @@ func spendGold_If_Possible(amountOfGold):
 
 func checkGoldLeft():
 	return self._current_gold
+
+func add_total_armyUnit():
+	_total_armyUnit += 1

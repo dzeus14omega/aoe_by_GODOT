@@ -4,6 +4,7 @@ var _mainTarget = null
 var _networkID
 var colorString : String
 #var state_command : int
+var max_pointHolding = 0
 
 func _ready():
 	_networkID = get_tree().get_network_unique_id()
@@ -24,6 +25,12 @@ func _process(delta):
 			set_process(false)
 		calculateClosestEnemy()
 		#print(_mainTarget)
+		var totalConstruct = 0
+		for construct in $Construction.get_children():
+			if not construct is Wall:
+				totalConstruct += 1
+		if totalConstruct > max_pointHolding:
+			max_pointHolding = totalConstruct
 	pass
 
 func check_winCondition() -> bool:
@@ -70,6 +77,9 @@ func get_mainTarget():
 
 func get_networkID():
 	return _networkID
+
+func get_max_pointHolding():
+	return max_pointHolding
 
 func setOrderCommand(state):
 	#state_command = state

@@ -78,7 +78,7 @@ func _on_Timer_timeout():
 		if listTraining.size() > 0:
 			print(listTraining)
 			var new_unitId = listTraining.pop_back()
-			
+			_mKing.add_total_armyUnit()
 #			new_unit.position = p.global_position
 			call_deferred("rpc", "setup_unit", new_unitId, p.global_position, get_network_master(), id_unit)
 			id_unit += 1
