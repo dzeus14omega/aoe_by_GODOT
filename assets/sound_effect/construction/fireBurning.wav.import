@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fireBurning.wav-8bb05f69b851bb5674928b2912b47fb5.sample"
+
+[deps]
+
+source_file="res://assets/sound_effect/construction/fireBurning.wav"
+dest_files=[ "res://.import/fireBurning.wav-8bb05f69b851bb5674928b2912b47fb5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -25,6 +25,7 @@ func _process(delta):
 			set_process(false)
 		calculateClosestEnemy()
 		#print(_mainTarget)
+		
 		var totalConstruct = 0
 		for construct in $Construction.get_children():
 			if not construct is Wall:

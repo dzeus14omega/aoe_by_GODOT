@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/footStepOnGrass.mp3-3ff5ec5b994c033466935cc5cc4b7ca4.mp3str"
+
+[deps]
+
+source_file="res://assets/sound_effect/actor/footStepOnGrass.mp3"
+dest_files=[ "res://.import/footStepOnGrass.mp3-3ff5ec5b994c033466935cc5cc4b7ca4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

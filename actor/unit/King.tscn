@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://actor/unit/King.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://actor/unit/animation_and_effect/healthBar.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/ui/clockwise_bar.png" type="Texture" id=15]
 [ext_resource path="res://assets/sound_effect/actor/hammer_sound.mp3" type="AudioStream" id=16]
+[ext_resource path="res://assets/sound_effect/actor/footStepOnGrass.mp3" type="AudioStream" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -183,6 +184,10 @@ anims/bleeding = SubResource( 7 )
 
 [node name="building_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 16 )
+
+[node name="footstep_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
+max_distance = 1500.0
 
 [connection signal="area_entered" from="direction/buildArea" to="." method="_on_minePoint_area_entered"]
 [connection signal="area_exited" from="direction/buildArea" to="." method="_on_minePoint_area_exited"]

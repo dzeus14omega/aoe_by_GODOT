@@ -9,12 +9,15 @@ func _ready():
 	gamestate.connect("game_error", self, "_on_game_error")
 	gamestate.connect("player_colorPane_changed", self, "refresh_colorPane")
 	# Set the player name according to the system username. Fallback to the path.
-	if OS.has_environment("USERNAME"):
-		$Connect/Name.text = OS.get_environment("USERNAME")
+	if gameUtils.history_playerName == "":
+		if OS.has_environment("USERNAME"):
+			$Connect/Name.text = OS.get_environment("USERNAME")
+		else:
+			var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
+			$Connect/Name.text = desktop_path[desktop_path.size() - 2]
 	else:
-		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
-		$Connect/Name.text = desktop_path[desktop_path.size() - 2]
-
+		$Connect/Name.text = gameUtils.history_playerName 
+		$Connect/IPAddress.text = gameUtils.history_playerHostIP
 
 func _on_host_pressed():
 	if gamestate.players.size() == 0:
@@ -37,6 +40,8 @@ func _on_host_pressed():
 	$Connect/ErrorLabel.text = ""
 
 	var player_name = $Connect/Name.text
+	gameUtils.history_playerName = player_name
+	gameUtils.save_setting()
 	gamestate.host_game(player_name, gamestate.player_info.colorId)
 	
 	#$Players/HostIP.text = str(IP.get_local_addresses())
@@ -68,15 +73,17 @@ func _on_join_pressed():
 	if not ip.is_valid_ip_address():
 		$Connect/ErrorLabel.text = "Invalid IP address!"
 		return
-
+	
 	$Connect/ErrorLabel.text = ""
 	$Connect/Host.visible = false
 	$Connect/Join.visible = false
-
 	var player_name = $Connect/Name.text
-	gamestate.join_game(ip, player_name)
 	
-
+	gameUtils.history_playerHostIP = ip
+	gameUtils.history_playerName = player_name
+	gameUtils.save_setting()
+	
+	gamestate.join_game(ip, player_name)
 
 func _on_connection_success():
 	$Connect.hide()

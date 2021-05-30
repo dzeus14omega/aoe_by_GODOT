@@ -170,22 +170,33 @@ func _move(delta: float) -> Vector2:
 		if motion != Vector2(0,0):
 			$AnimatedSprite.visible = true
 			$Sprite.visible = false
+			_playFootStep(true)
 		else:
 			$AnimatedSprite.visible = false
 			$Sprite.visible = true
+			_playFootStep(false)
 		#rset("puppet_motion", motion)
 		rset("puppet_pos", position)
 	else:
 		if puppet_pos != position:
 			$AnimatedSprite.visible = true
 			$Sprite.visible = false
+			_playFootStep(true)
 		else:
 			$AnimatedSprite.visible = false
 			$Sprite.visible = true
-		
+			_playFootStep(false)
 		position = puppet_pos
 		#motion = puppet_motion
 	return motion
+
+func _playFootStep(isPlay : bool):
+	$footstep_sound.volume_db = gameUtils.get_VolumnSound()
+	if isPlay:
+		if !$footstep_sound.is_playing():
+			$footstep_sound.play(0.0)
+	else:
+		$footstep_sound.stop()
 
 func set_colorFromKingdom(colorString):
 	self._colorString = colorString
@@ -266,7 +277,8 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 				#TODO: display wall_shadow red to warnning
 				
 		else:
-			if _minePoint != null:
+			#if _minePoint != null:
+			if is_instance_valid(_minePoint):
 				#manage number of barrack count
 				var cur_barrackNum = 0;
 				for child in get_parent().get_node("Construction").get_children():
