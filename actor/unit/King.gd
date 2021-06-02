@@ -191,12 +191,13 @@ func _move(delta: float) -> Vector2:
 	return motion
 
 func _playFootStep(isPlay : bool):
-	$footstep_sound.volume_db = gameUtils.get_VolumnSound()
-	if isPlay:
-		if !$footstep_sound.is_playing():
-			$footstep_sound.play(0.0)
-	else:
-		$footstep_sound.stop()
+#	$footstep_sound.volume_db = gameUtils.get_VolumnSound()
+#	if isPlay:
+#		if !$footstep_sound.is_playing():
+#			$footstep_sound.play(0.0)
+#	else:
+#		$footstep_sound.stop()
+	pass
 
 func set_colorFromKingdom(colorString):
 	self._colorString = colorString

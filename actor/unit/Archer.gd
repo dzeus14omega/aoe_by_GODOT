@@ -25,11 +25,9 @@ func _init():
 	self._hp = 35
 	self._damage = 15
 
-
-
 func _ready():
 	$healthBar.max_value = self._hp
-	$AnimatedSprite.play("move")
+	$AnimatedSprite.play("idle")
 	pass # Replace with function body.
 
 sync func attack(direction, peerID, arrowID):
@@ -63,12 +61,10 @@ func _process(delta):
 					if not $direction/bow/shoot.is_playing():
 						rpc("attack", self._direction, self.get_network_master(), _arrowID)
 						_arrowID +=1
-					$AnimatedSprite.visible = false
-					$sprite.visible = true
+					playMovementAnimation(Vector2(0,0))
 				else:
 					_move_to_main_Target()
-					$AnimatedSprite.visible = true
-					$sprite.visible = false
+					playMovementAnimation(_direction)
 				pass
 			if state_command == 1:
 				#move to King and keep distance around King
@@ -78,15 +74,34 @@ func _process(delta):
 			rset("puppet_pos", self.global_position)
 	else:
 		$direction.rotation = puppet_rotation
-		if (self.position != puppet_pos):
-			$AnimatedSprite.visible = true
-			$sprite.visible = false
-		else :
-			$AnimatedSprite.visible = false
-			$sprite.visible = true
+		playMovementAnimation(puppet_pos - self.position)
 		self.position = puppet_pos
 		
 	
+	pass
+
+func playMovementAnimation(motion : Vector2):
+	if (motion == Vector2(0,0)):
+		$AnimatedSprite.play("idle")
+		return
+	if (motion.y >= 0):
+		if motion.y >= abs(motion.x):
+			$AnimatedSprite.play("moveForward")
+		else:
+			$AnimatedSprite.play("moveLeft")
+			if (motion.x > 0):
+				$AnimatedSprite.flip_h = true
+			else:
+				$AnimatedSprite.flip_h = false
+	else:
+		if -motion.y >= abs(motion.x):
+			$AnimatedSprite.play("moveBackward")
+		else:
+			$AnimatedSprite.play("moveLeft")
+			if (motion.x > 0):
+				$AnimatedSprite.flip_h = true
+			else:
+				$AnimatedSprite.flip_h = false
 	pass
 
 func move_to_King():
@@ -100,15 +115,17 @@ func move_to_King():
 	if disToKing > 200:
 		$direction.look_at(- _ownKing.global_position)
 		move_and_slide(self._direction * _speed)
+		playMovementAnimation(_direction)
 	elif disToKing < 100 :
 		move_and_slide(-self._direction * _speed)
+		playMovementAnimation(_direction)
 	else:
+		playMovementAnimation(Vector2(0,0))
 		if targetInRange != null:
 			if not $direction/bow/shoot.is_playing():
 				rpc("attack", self._direction, self.get_network_master(), _arrowID)
 				_arrowID +=1
-			$AnimatedSprite.visible = false
-			$sprite.visible = true
+			
 	pass
 
 func _rotate_to_mainTarget():

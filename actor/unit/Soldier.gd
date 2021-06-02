@@ -27,7 +27,7 @@ func init(mKing):
 
 func _ready():
 	$healthBar.max_value = self._hp
-	$AnimatedSprite.play("move")
+	$AnimatedSprite.play("idle")
 	pass # Replace with function body.
 
 sync func attack(random_number):
@@ -57,19 +57,19 @@ func _process(delta):
 			_rotate_to_mainTarget()
 			if state_command == 0:
 				_move_to_main_Target()
-				$AnimatedSprite.visible = true
-				$sprite.visible = false
+				#TODO: set animated sprite animation
+				playMovementAnimation(_direction)
 				pass
 			if state_command == 1:
 				#move to King and keep distance around King
 				move_to_King()
+				#playMovementAnimation(_direction)
 				pass
 			rset("puppet_rotation", $direction.rotation)
 			rset("puppet_pos", self.global_position)
 	else:
 		$direction.rotation = puppet_rotation
-		$AnimatedSprite.visible = true
-		$sprite.visible = false
+		playMovementAnimation(puppet_pos - self.position)
 		self.position = puppet_pos
 	
 	
@@ -87,6 +87,30 @@ func _process(delta):
 				#print("deny attack")
 	pass
 
+func playMovementAnimation(motion : Vector2):
+	if (motion == Vector2(0,0)):
+		$AnimatedSprite.play("idle")
+		return
+	if (motion.y >= 0):
+		if motion.y >= abs(motion.x):
+			$AnimatedSprite.play("moveForward")
+		else:
+			$AnimatedSprite.play("moveLeft")
+			if (motion.x > 0):
+				$AnimatedSprite.flip_h = true
+			else:
+				$AnimatedSprite.flip_h = false
+	else:
+		if -motion.y >= abs(motion.x):
+			$AnimatedSprite.play("moveBackward")
+		else:
+			$AnimatedSprite.play("moveLeft")
+			if (motion.x > 0):
+				$AnimatedSprite.flip_h = true
+			else:
+				$AnimatedSprite.flip_h = false
+	pass
+
 func move_to_King():
 	#print(_ownKing.global_position)
 	
@@ -98,8 +122,12 @@ func move_to_King():
 	if disToKing > 200:
 		$direction.look_at(- _ownKing.global_position)
 		move_and_slide(self._direction * _speed)
-	if disToKing < 100 :
-		move_and_slide(-self._direction * _speed)	
+		playMovementAnimation(_direction)
+	elif disToKing < 100 :
+		move_and_slide(-self._direction * _speed)
+		playMovementAnimation(_direction)
+	else:
+		playMovementAnimation(Vector2(0,0))
 	pass
 
 func _rotate_to_mainTarget():
