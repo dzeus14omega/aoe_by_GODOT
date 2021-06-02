@@ -12,6 +12,7 @@ func _init():
 func _ready():
 	print(link_myKing)
 	$healthBar.max_value = _hp
+	$healthBar.value = _hp
 	if is_network_master():
 		$mining_cooldown.wait_time = speedMine
 		$mining_cooldown.start()

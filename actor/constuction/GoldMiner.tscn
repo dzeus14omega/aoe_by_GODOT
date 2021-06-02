@@ -35,20 +35,17 @@ script = ExtResource( 5 )
 stream = ExtResource( 6 )
 max_distance = 1200.0
 
-[node name="flame_animation" parent="fire_batch" instance=ExtResource( 4 )]
-visible = false
+[node name="flame1" parent="fire_batch" instance=ExtResource( 4 )]
 position = Vector2( -24, 8 )
 
-[node name="flame_animation2" parent="fire_batch" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 16, 30.5 )
+[node name="flame2" parent="fire_batch" instance=ExtResource( 4 )]
+position = Vector2( 48, 23.9998 )
+scale = Vector2( 1.56667, 1.56667 )
 
-[node name="flame_animation3" parent="fire_batch" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( -16, 30.5 )
-scale = Vector2( 1.38889, 1.38889 )
+[node name="flame3" parent="fire_batch" instance=ExtResource( 4 )]
+position = Vector2( -40, 15.9998 )
+scale = Vector2( 2.11667, 2.11667 )
 
-[node name="flame_animation4" parent="fire_batch" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 7.99999, -0.749994 )
-scale = Vector2( 1.92222, 1.92222 )
+[node name="flame4" parent="fire_batch" instance=ExtResource( 4 )]
+position = Vector2( 8, -24.0002 )
+scale = Vector2( 3.09444, 3.09444 )
