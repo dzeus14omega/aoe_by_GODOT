@@ -35,6 +35,7 @@ func _ready():
 #	giant.init(_mKing)
 	
 	$healthBar.max_value = _hp
+	$healthBar.value = _hp
 	#print(maxTrainAmount)
 	#trainAmry(soldier.instance())
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actor/constuction/GoldMiner.gd" type="Script" id=1]
 [ext_resource path="res://assets/construction/goldmine.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://actor/constuction/construction_assets/Flame_animation.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actor/constuction/construction_assets/FireBatch.gd" type="Script" id=5]
 [ext_resource path="res://assets/sound_effect/construction/fireBurning.wav" type="AudioStream" id=6]
+[ext_resource path="res://actor/constuction/construction_assets/Smoke.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 56.0
@@ -36,16 +37,24 @@ stream = ExtResource( 6 )
 max_distance = 1200.0
 
 [node name="flame1" parent="fire_batch" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( -24, 8 )
 
 [node name="flame2" parent="fire_batch" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 48, 23.9998 )
 scale = Vector2( 1.56667, 1.56667 )
 
 [node name="flame3" parent="fire_batch" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( -40, 15.9998 )
 scale = Vector2( 2.11667, 2.11667 )
 
 [node name="flame4" parent="fire_batch" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 8, -24.0002 )
 scale = Vector2( 3.09444, 3.09444 )
+
+[node name="Smoke" parent="fire_batch" instance=ExtResource( 7 )]
+visible = false
+position = Vector2( -8, 39.9998 )

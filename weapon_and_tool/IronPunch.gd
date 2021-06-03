@@ -17,6 +17,7 @@ func _ready():
 	pass # Replace with function body.
 
 func attack():
+	$sound_attack.volume_db = gameUtils.get_VolumnSound()
 	$punch_attack.play("punch")
 	pass
 

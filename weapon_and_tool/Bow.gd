@@ -20,6 +20,9 @@ func shoot(direction, peerID, arrowID):
 	arrow.set_network_master(peerID)
 	get_node("arrow_patch").add_child(arrow)
 	self._arrow_onLoad = arrow
+	
+	#set sound volumn
+	$sound_attack.volume_db = gameUtils.get_VolumnSound()
 	$shoot.play("shooting")
 	pass
 

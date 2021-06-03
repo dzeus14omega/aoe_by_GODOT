@@ -153,7 +153,7 @@ config/icon="res://icon.png"
 [autoload]
 
 gamestate="*res://client_server/gamestate.gd"
-gameUtils="*res://client_server/gameUtils.gd"
+gameUtils="*res://scenes/GameUtils.tscn"
 
 [display]
 

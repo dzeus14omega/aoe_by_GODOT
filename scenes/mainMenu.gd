@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	gameUtils.playAudioMenu()
 	$AnimationPlayer.play("title_fade_in")
 	pass # Replace with function body.
 

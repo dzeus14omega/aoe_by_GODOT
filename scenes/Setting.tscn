@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/bg_castle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/btn_back.png" type="Texture" id=2]
@@ -8,11 +8,15 @@
 [ext_resource path="res://assets/ui/ui_bar1_align.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 80
+size = 65
 font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 65
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 80
 font_data = ExtResource( 5 )
 
 [node name="Setting" type="Control"]
@@ -25,7 +29,7 @@ __meta__ = {
 
 [node name="bg_castle" parent="." instance=ExtResource( 1 )]
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="backgroundPanel" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 320.0
@@ -38,11 +42,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChangeControl" type="TextureButton" parent="TextureRect"]
-margin_left = 392.0
-margin_top = 120.0
-margin_right = 896.0
-margin_bottom = 272.0
+[node name="ChangeControl" type="TextureButton" parent="backgroundPanel"]
+margin_left = 480.0
+margin_top = 136.0
+margin_right = 800.0
+margin_bottom = 232.0
 texture_normal = ExtResource( 4 )
 expand = true
 __meta__ = {
@@ -50,80 +54,110 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="TextureRect/ChangeControl"]
-margin_left = 88.0
-margin_top = 32.0
-margin_right = 407.0
-margin_bottom = 119.0
+[node name="Label" type="Label" parent="backgroundPanel/ChangeControl"]
+margin_left = 32.0
+margin_top = 8.0
+margin_right = 351.0
+margin_bottom = 95.0
 custom_fonts/font = SubResource( 1 )
 text = "Change Control"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="masterVolumn_label" type="Label" parent="TextureRect"]
+[node name="masterVolumn_label" type="Label" parent="backgroundPanel"]
 margin_left = 272.0
-margin_top = 344.0
+margin_top = 280.0
 margin_right = 519.0
-margin_bottom = 415.0
+margin_bottom = 351.0
 custom_fonts/font = SubResource( 2 )
 text = "Master Volumn"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="masterVolumn_slider" type="HSlider" parent="TextureRect/masterVolumn_label"]
+[node name="masterVolumn_slider" type="HSlider" parent="backgroundPanel/masterVolumn_label"]
 margin_left = 320.0
 margin_right = 432.0
 margin_bottom = 16.0
 rect_scale = Vector2( 4, 5 )
 max_value = 20.0
+step = 0.5
 value = 20.0
 tick_count = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="soundVolumn_label" type="Label" parent="TextureRect"]
+[node name="soundVolumn_label" type="Label" parent="backgroundPanel"]
 margin_left = 272.0
-margin_top = 448.0
+margin_top = 408.0
 margin_right = 519.0
-margin_bottom = 519.0
+margin_bottom = 479.0
 custom_fonts/font = SubResource( 2 )
 text = "Sound Volumn"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="soundVolumn_slider" type="HSlider" parent="TextureRect/soundVolumn_label"]
+[node name="soundVolumn_slider" type="HSlider" parent="backgroundPanel/soundVolumn_label"]
 margin_left = 320.0
 margin_right = 432.0
 margin_bottom = 16.0
 rect_scale = Vector2( 4, 5 )
-max_value = 20.0
-value = 20.0
+value = 100.0
 tick_count = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="musicVolumn_label" type="Label" parent="TextureRect"]
+[node name="musicVolumn_label" type="Label" parent="backgroundPanel"]
 margin_left = 272.0
-margin_top = 552.0
+margin_top = 528.0
 margin_right = 519.0
-margin_bottom = 623.0
+margin_bottom = 599.0
 custom_fonts/font = SubResource( 2 )
 text = "Music Volumn"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="musicVolumn_slider" type="HSlider" parent="TextureRect/musicVolumn_label"]
+[node name="musicVolumn_slider" type="HSlider" parent="backgroundPanel/musicVolumn_label"]
 margin_left = 320.0
 margin_right = 432.0
 margin_bottom = 16.0
 rect_scale = Vector2( 4, 5 )
-max_value = 20.0
-value = 20.0
+value = 100.0
 tick_count = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="SaveButton" type="TextureButton" parent="backgroundPanel"]
+margin_left = 416.0
+margin_top = 800.0
+margin_right = 872.0
+margin_bottom = 944.0
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="backgroundPanel/SaveButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 32.0
+margin_right = -73.0
+margin_bottom = -25.0
+custom_fonts/font = SubResource( 3 )
+text = "Save"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BackButton" type="TextureButton" parent="."]
 margin_left = 32.0
@@ -136,4 +170,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="button_up" from="backgroundPanel/SaveButton" to="." method="_on_SaveButton_button_up"]
 [connection signal="button_up" from="BackButton" to="." method="_on_BackButton_button_up"]

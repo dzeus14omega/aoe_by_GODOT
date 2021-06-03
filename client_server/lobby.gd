@@ -20,6 +20,7 @@ func _ready():
 		$Connect/IPAddress.text = gameUtils.history_playerHostIP
 
 func _on_host_pressed():
+	gameUtils.playAudioLobby()
 	if gamestate.players.size() == 0:
 		$Players/Leave.visible = true
 	else:
@@ -86,6 +87,7 @@ func _on_join_pressed():
 	gamestate.join_game(ip, player_name)
 
 func _on_connection_success():
+	gameUtils.playAudioLobby()
 	$Connect.hide()
 	$Players.show()
 	$AnimationPlayer.play("colorPane_in")
@@ -103,6 +105,7 @@ func _on_connection_failed():
 	$Connect/ErrorLabel.set_text("Connection failed.")
 
 func _on_game_ended():
+	gameUtils.playAudioMenu()
 	get_tree().get_network_peer().close_connection(200)
 	show()
 	$Connect.show()

@@ -1,6 +1,7 @@
 [gd_scene load_steps=130 format=2]
 
 [ext_resource path="res://actor/unit/Soldier.gd" type="Script" id=1]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_018.png" type="Texture" id=2]
 [ext_resource path="res://weapon_and_tool/ShortSword.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actor/unit/animation_and_effect/Blood_effect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/character/Citizen/Side/Walk/0_Citizen_Walk_010.png" type="Texture" id=5]
@@ -64,61 +65,60 @@
 [ext_resource path="res://assets/character/Citizen/Side/Walk/0_Citizen_Walk_006.png" type="Texture" id=63]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_018.png" type="Texture" id=64]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_026.png" type="Texture" id=65]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_007.png" type="Texture" id=66]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_011.png" type="Texture" id=66]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_003.png" type="Texture" id=67]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_010.png" type="Texture" id=68]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_011.png" type="Texture" id=69]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_011.png" type="Texture" id=70]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_013.png" type="Texture" id=71]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_014.png" type="Texture" id=72]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_019.png" type="Texture" id=70]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_014.png" type="Texture" id=71]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_020.png" type="Texture" id=72]
 [ext_resource path="res://assets/character/Citizen/Front/Walk/0_Citizen_Walk_027.png" type="Texture" id=73]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_018.png" type="Texture" id=74]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_021.png" type="Texture" id=74]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_022.png" type="Texture" id=75]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_029.png" type="Texture" id=76]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_025.png" type="Texture" id=77]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_023.png" type="Texture" id=78]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_027.png" type="Texture" id=79]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_022.png" type="Texture" id=77]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_023.png" type="Texture" id=78]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_010.png" type="Texture" id=79]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_009.png" type="Texture" id=80]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_012.png" type="Texture" id=81]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_014.png" type="Texture" id=82]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_024.png" type="Texture" id=83]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_001.png" type="Texture" id=84]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_002.png" type="Texture" id=85]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_012.png" type="Texture" id=86]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_019.png" type="Texture" id=87]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_024.png" type="Texture" id=88]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_008.png" type="Texture" id=89]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_015.png" type="Texture" id=84]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_025.png" type="Texture" id=85]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_026.png" type="Texture" id=86]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_027.png" type="Texture" id=87]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_024.png" type="Texture" id=88]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_028.png" type="Texture" id=89]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_027.png" type="Texture" id=90]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_009.png" type="Texture" id=91]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_012.png" type="Texture" id=91]
 [ext_resource path="res://assets/character/Citizen/Front/Walk/0_Citizen_Walk_028.png" type="Texture" id=92]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_001.png" type="Texture" id=93]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_013.png" type="Texture" id=94]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_017.png" type="Texture" id=95]
 [ext_resource path="res://assets/character/Citizen/Front/Walk/0_Citizen_Walk_029.png" type="Texture" id=96]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_003.png" type="Texture" id=97]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_013.png" type="Texture" id=97]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_019.png" type="Texture" id=98]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_004.png" type="Texture" id=99]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_005.png" type="Texture" id=100]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_006.png" type="Texture" id=101]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_016.png" type="Texture" id=99]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_017.png" type="Texture" id=100]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_000.png" type="Texture" id=101]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_028.png" type="Texture" id=102]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_004.png" type="Texture" id=103]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_006.png" type="Texture" id=104]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_010.png" type="Texture" id=105]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_016.png" type="Texture" id=106]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_015.png" type="Texture" id=107]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_017.png" type="Texture" id=108]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_020.png" type="Texture" id=109]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_022.png" type="Texture" id=110]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_028.png" type="Texture" id=111]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_021.png" type="Texture" id=112]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_001.png" type="Texture" id=105]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_002.png" type="Texture" id=106]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_003.png" type="Texture" id=107]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_004.png" type="Texture" id=108]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_005.png" type="Texture" id=109]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_008.png" type="Texture" id=110]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_009.png" type="Texture" id=111]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_006.png" type="Texture" id=112]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_020.png" type="Texture" id=113]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_025.png" type="Texture" id=114]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_015.png" type="Texture" id=115]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_016.png" type="Texture" id=116]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_026.png" type="Texture" id=117]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_000.png" type="Texture" id=118]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_007.png" type="Texture" id=117]
+[ext_resource path="res://assets/character/Citizen/Front/Idle Blinking/0_Citizen_Idle Blinking_029.png" type="Texture" id=118]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_005.png" type="Texture" id=119]
-[ext_resource path="res://assets/character/Citizen/Front/Idle/0_Citizen_Idle_029.png" type="Texture" id=120]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_021.png" type="Texture" id=121]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_007.png" type="Texture" id=122]
 [ext_resource path="res://assets/character/Citizen/Back/Walk/0_Citizen_Walk_002.png" type="Texture" id=123]
@@ -128,24 +128,24 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 118 ), ExtResource( 84 ), ExtResource( 85 ), ExtResource( 97 ), ExtResource( 99 ), ExtResource( 100 ), ExtResource( 101 ), ExtResource( 66 ), ExtResource( 89 ), ExtResource( 91 ), ExtResource( 105 ), ExtResource( 70 ), ExtResource( 86 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 107 ), ExtResource( 106 ), ExtResource( 108 ), ExtResource( 74 ), ExtResource( 87 ), ExtResource( 109 ), ExtResource( 112 ), ExtResource( 110 ), ExtResource( 78 ), ExtResource( 88 ), ExtResource( 77 ), ExtResource( 117 ), ExtResource( 79 ), ExtResource( 111 ), ExtResource( 120 ) ],
+"frames": [ ExtResource( 101 ), ExtResource( 105 ), ExtResource( 106 ), ExtResource( 107 ), ExtResource( 108 ), ExtResource( 109 ), ExtResource( 112 ), ExtResource( 117 ), ExtResource( 110 ), ExtResource( 111 ), ExtResource( 79 ), ExtResource( 66 ), ExtResource( 91 ), ExtResource( 97 ), ExtResource( 71 ), ExtResource( 84 ), ExtResource( 99 ), ExtResource( 100 ), ExtResource( 2 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 74 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 88 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 87 ), ExtResource( 89 ), ExtResource( 118 ) ],
 "loop": true,
 "name": "idle",
-"speed": 45.0
+"speed": 35.0
 }, {
 "frames": [ ExtResource( 13 ), ExtResource( 62 ), ExtResource( 37 ), ExtResource( 27 ), ExtResource( 51 ), ExtResource( 19 ), ExtResource( 63 ), ExtResource( 38 ), ExtResource( 48 ), ExtResource( 29 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 28 ), ExtResource( 30 ), ExtResource( 61 ), ExtResource( 21 ), ExtResource( 31 ), ExtResource( 14 ), ExtResource( 58 ), ExtResource( 56 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 22 ), ExtResource( 15 ), ExtResource( 39 ), ExtResource( 45 ), ExtResource( 11 ), ExtResource( 40 ), ExtResource( 46 ), ExtResource( 60 ) ],
 "loop": true,
 "name": "moveLeft",
 "speed": 45.0
 }, {
-"frames": [ ExtResource( 32 ), ExtResource( 6 ), ExtResource( 34 ), ExtResource( 53 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 7 ), ExtResource( 41 ), ExtResource( 10 ), ExtResource( 43 ), ExtResource( 33 ), ExtResource( 57 ), ExtResource( 35 ), ExtResource( 16 ), ExtResource( 36 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 42 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 47 ), ExtResource( 26 ), ExtResource( 50 ), ExtResource( 44 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 73 ), ExtResource( 92 ), ExtResource( 96 ) ],
-"loop": true,
-"name": "moveForward",
-"speed": 45.0
-}, {
 "frames": [ ExtResource( 125 ), ExtResource( 93 ), ExtResource( 123 ), ExtResource( 67 ), ExtResource( 103 ), ExtResource( 119 ), ExtResource( 104 ), ExtResource( 122 ), ExtResource( 126 ), ExtResource( 80 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 81 ), ExtResource( 94 ), ExtResource( 82 ), ExtResource( 115 ), ExtResource( 116 ), ExtResource( 95 ), ExtResource( 64 ), ExtResource( 98 ), ExtResource( 113 ), ExtResource( 121 ), ExtResource( 75 ), ExtResource( 124 ), ExtResource( 83 ), ExtResource( 114 ), ExtResource( 65 ), ExtResource( 90 ), ExtResource( 102 ), ExtResource( 76 ) ],
 "loop": true,
 "name": "moveBackward",
+"speed": 45.0
+}, {
+"frames": [ ExtResource( 32 ), ExtResource( 6 ), ExtResource( 34 ), ExtResource( 53 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 7 ), ExtResource( 41 ), ExtResource( 10 ), ExtResource( 43 ), ExtResource( 33 ), ExtResource( 57 ), ExtResource( 35 ), ExtResource( 16 ), ExtResource( 36 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 42 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 47 ), ExtResource( 26 ), ExtResource( 50 ), ExtResource( 44 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 73 ), ExtResource( 92 ), ExtResource( 96 ) ],
+"loop": true,
+"name": "moveForward",
 "speed": 45.0
 } ]
 
@@ -196,6 +196,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 0.158839, 0.158839 )
 frames = SubResource( 1 )
 animation = "idle"
+frame = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

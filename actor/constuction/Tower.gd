@@ -20,6 +20,7 @@ func _ready():
 	set_process(false)
 	#print(get_network_master())
 	$healthBar.max_value = _hp
+	$healthBar.value = _hp
 	$AnimationConstruct.play("construct_finished")
 	#print($range.get_overlapping_bodies().size())
 	pass # Replace with function body.
@@ -90,6 +91,7 @@ func get_ClosestEnemy_inRange():
 
 
 sync func shoot(direction : Vector2, peerID, bulletID):
+	$sound_attack.volume_db = gameUtils.get_VolumnSound()
 	$sound_attack.play(0)
 	var bullet = _bullet.instance()
 	bullet.init(direction, self.global_position, tower_dam, 1.2)

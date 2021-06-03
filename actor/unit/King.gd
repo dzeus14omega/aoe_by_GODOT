@@ -316,6 +316,7 @@ func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wal
 
 sync func startBuildingAnimate():
 	$AnimationBuilding.play("build")
+	$building_sound.volume_db = gameUtils.get_VolumnSound()
 	$building_sound.play(0)
 	pass
 

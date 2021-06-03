@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://actor/constuction/Barrack.gd" type="Script" id=1]
 [ext_resource path="res://assets/construction/barrack2.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/ui/clockwise_bar.png" type="Texture" id=4]
 [ext_resource path="res://assets/construction/animation/flame_spritesheet.png" type="Texture" id=5]
 [ext_resource path="res://actor/constuction/construction_assets/Flame_animation.tscn" type="PackedScene" id=6]
+[ext_resource path="res://actor/constuction/construction_assets/FireBatch.gd" type="Script" id=7]
+[ext_resource path="res://assets/sound_effect/construction/fireBurning.wav" type="AudioStream" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 56.0
@@ -14,131 +16,126 @@ height = 0.0
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 45, 45 )
+region = Rect2( 90, 0, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 45, 0, 45, 45 )
+region = Rect2( 135, 0, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 90, 0, 45, 45 )
+region = Rect2( 180, 0, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 135, 0, 45, 45 )
+region = Rect2( 0, 45, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 180, 0, 45, 45 )
+region = Rect2( 45, 45, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 0, 45, 45, 45 )
+region = Rect2( 90, 45, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 45, 45, 45, 45 )
+region = Rect2( 135, 45, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 90, 45, 45, 45 )
+region = Rect2( 180, 45, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 135, 45, 45, 45 )
+region = Rect2( 0, 90, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 180, 45, 45, 45 )
+region = Rect2( 45, 90, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 0, 90, 45, 45 )
+region = Rect2( 90, 90, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 45, 90, 45, 45 )
+region = Rect2( 135, 90, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 90, 90, 45, 45 )
+region = Rect2( 180, 90, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=15]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 135, 90, 45, 45 )
+region = Rect2( 0, 135, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=16]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 180, 90, 45, 45 )
+region = Rect2( 45, 135, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=17]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 0, 135, 45, 45 )
+region = Rect2( 90, 135, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 45, 135, 45, 45 )
+region = Rect2( 135, 135, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=19]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 90, 135, 45, 45 )
+region = Rect2( 180, 135, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=20]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 135, 135, 45, 45 )
+region = Rect2( 0, 180, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=21]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 180, 135, 45, 45 )
+region = Rect2( 45, 180, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=22]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 0, 180, 45, 45 )
+region = Rect2( 90, 180, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=23]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 45, 180, 45, 45 )
+region = Rect2( 135, 180, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=24]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 90, 180, 45, 45 )
+region = Rect2( 180, 180, 45, 45 )
 
 [sub_resource type="AtlasTexture" id=25]
 flags = 4
 atlas = ExtResource( 5 )
-region = Rect2( 135, 180, 45, 45 )
-
-[sub_resource type="AtlasTexture" id=26]
-flags = 4
-atlas = ExtResource( 5 )
 region = Rect2( 180, 180, 45, 45 )
 
-[sub_resource type="SpriteFrames" id=27]
+[sub_resource type="SpriteFrames" id=26]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), null, SubResource( 25 ) ],
 "loop": true,
 "name": "default",
 "speed": 25.0
@@ -197,34 +194,6 @@ __meta__ = {
 margin_top = -105.0
 margin_bottom = -68.0
 
-[node name="fire_batch" type="Node2D" parent="healthBar"]
-position = Vector2( 110, 146.667 )
-scale = Vector2( 1.66667, 1.66667 )
-
-[node name="flame_animation" parent="healthBar/fire_batch" instance=ExtResource( 6 )]
-visible = false
-position = Vector2( 40.75, -15.75 )
-scale = Vector2( 1.38889, 1.38889 )
-frames = SubResource( 27 )
-
-[node name="flame_animation2" parent="healthBar/fire_batch" instance=ExtResource( 6 )]
-visible = false
-position = Vector2( -48, -15 )
-scale = Vector2( 0.677778, 1.03333 )
-frames = SubResource( 27 )
-
-[node name="flame_animation3" parent="healthBar/fire_batch" instance=ExtResource( 6 )]
-visible = false
-position = Vector2( 24, -71 )
-scale = Vector2( 1.38889, 1.38889 )
-frames = SubResource( 27 )
-
-[node name="flame_animation4" parent="healthBar/fire_batch" instance=ExtResource( 6 )]
-visible = false
-position = Vector2( -16, 17 )
-scale = Vector2( 2.38333, 2.38333 )
-frames = SubResource( 27 )
-
 [node name="trainingProgress" type="TextureProgress" parent="."]
 visible = false
 margin_left = -22.0
@@ -242,5 +211,37 @@ tint_progress = Color( 0.898039, 0.886275, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="fire_batch" type="Node2D" parent="."]
+position = Vector2( 0, 0.000205994 )
+script = ExtResource( 7 )
+
+[node name="fireBurn" type="AudioStreamPlayer2D" parent="fire_batch"]
+stream = ExtResource( 8 )
+max_distance = 1200.0
+
+[node name="flame1" parent="fire_batch" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( -16, -0.000205994 )
+scale = Vector2( 1.38889, 1.38889 )
+frames = SubResource( 26 )
+
+[node name="flame2" parent="fire_batch" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 24, 15.9998 )
+scale = Vector2( 1.56667, 1.56667 )
+frames = SubResource( 26 )
+
+[node name="flame3" parent="fire_batch" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( -40, -56.0002 )
+scale = Vector2( 2.11667, 2.11667 )
+frames = SubResource( 26 )
+
+[node name="flame4" parent="fire_batch" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 48, -64.0002 )
+scale = Vector2( 3.09444, 3.09444 )
+frames = SubResource( 26 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

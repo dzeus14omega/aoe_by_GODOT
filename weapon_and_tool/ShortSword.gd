@@ -17,6 +17,8 @@ func _ready():
 
 func attack(random_number):
 	#print("attack")
+	$sound_attack_slave.volume_db = gameUtils.get_VolumnSound()
+	$sound_attack_stab.volume_db = gameUtils.get_VolumnSound()
 	if (random_number >=0.5):
 		$slash_atk.play("slash_stab")
 	else:
