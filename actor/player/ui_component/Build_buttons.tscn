@@ -15,10 +15,10 @@
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -160.0
-margin_top = 518.0
-margin_right = -80.0
-margin_bottom = -279.0
+margin_left = -568.0
+margin_top = 930.0
+margin_right = -284.0
+margin_bottom = -73.0
 rect_scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -31,9 +31,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -80.0
-margin_top = -283.0
-margin_bottom = -213.0
+margin_left = -285.0
+margin_top = -78.0
+margin_right = -203.0
+margin_bottom = -2.0
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 1
@@ -47,9 +48,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -80.0
-margin_top = -212.0
-margin_bottom = -142.0
+margin_left = -216.0
+margin_top = -77.0
+margin_right = -136.0
+margin_bottom = -2.0
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 1
@@ -63,9 +65,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -80.0
-margin_top = -142.0
-margin_bottom = -72.0001
+margin_left = -148.0
+margin_top = -78.0
+margin_right = -74.0
+margin_bottom = -2.0
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 1
@@ -79,10 +82,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -79.6667
-margin_top = -72.0001
-margin_right = 0.333252
-margin_bottom = -2.00012
+margin_left = -84.0
+margin_top = -78.0
+margin_bottom = -2.0
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 1
@@ -90,22 +92,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="listButton" type="VBoxContainer" parent="."]
+[node name="listButton" type="HBoxContainer" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -72.0
-margin_top = -280.0
-margin_right = -8.0
-margin_bottom = -8.0
+margin_left = -276.0
+margin_top = -74.0
+margin_right = -1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="buildGoldMine" type="TextureButton" parent="listButton"]
 margin_right = 64.0
-margin_bottom = 64.0
+margin_bottom = 74.0
 texture_normal = ExtResource( 6 )
 texture_disabled = ExtResource( 10 )
 stretch_mode = 5
@@ -114,9 +115,9 @@ __meta__ = {
 }
 
 [node name="buildBarrack" type="TextureButton" parent="listButton"]
-margin_top = 68.0
-margin_right = 64.0
-margin_bottom = 132.0
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 74.0
 texture_normal = ExtResource( 3 )
 texture_disabled = ExtResource( 8 )
 stretch_mode = 6
@@ -125,9 +126,9 @@ __meta__ = {
 }
 
 [node name="buildTower" type="TextureButton" parent="listButton"]
-margin_top = 136.0
-margin_right = 64.0
-margin_bottom = 200.0
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 74.0
 texture_normal = ExtResource( 5 )
 texture_disabled = ExtResource( 9 )
 stretch_mode = 1
@@ -136,9 +137,9 @@ __meta__ = {
 }
 
 [node name="buildWall" type="TextureButton" parent="listButton"]
-margin_top = 204.0
-margin_right = 64.0
-margin_bottom = 268.0
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 74.0
 texture_normal = ExtResource( 4 )
 texture_disabled = ExtResource( 7 )
 __meta__ = {

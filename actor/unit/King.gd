@@ -63,7 +63,7 @@ func _ready():
 		add_child(main_ui)
 		self.joystick_move = main_ui.get_node("Joystick")
 		
-		main_ui.get_node("status/gold_amount").set_text(String(_current_gold))
+		main_ui.get_node("statusGold/gold_amount").set_text(String(_current_gold))
 
 func game_Victory():
 	set_physics_process(false)
@@ -398,13 +398,13 @@ sync func destroyed():
 func gain_gold(amountOfGold):
 	self._current_gold += amountOfGold
 	self._total_gold += amountOfGold
-	$UI/status/gold_amount.set_text(String(checkGoldLeft()))
+	$UI/statusGold/gold_amount.set_text(String(checkGoldLeft()))
 	pass
 
 func spendGold_If_Possible(amountOfGold):
 	if self._current_gold - amountOfGold >= 0:
 		_current_gold -= amountOfGold
-		$UI/status/gold_amount.set_text(String(checkGoldLeft()))
+		$UI/statusGold/gold_amount.set_text(String(checkGoldLeft()))
 		return true
 	else:
 		return false

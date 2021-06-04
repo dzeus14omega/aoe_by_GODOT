@@ -35,6 +35,7 @@ func _process(delta):
 		#print($mining_cooldown.time_left)
 		if $mining_cooldown.time_left == 0:
 			#print("gain gold")
+			$floating_CoinBatchAnimation.play("floatingCoin")
 			link_myKing.gain_gold(amountOfGold_perPull)
 			$mining_cooldown.start()
 			

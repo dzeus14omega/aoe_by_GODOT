@@ -17,3 +17,10 @@ func unlock_buildContruction():
 func lock_buildContruction():
 	$build_buttons.buildConstructionDisable()
 	pass
+
+func _process(delta):
+	if is_instance_valid(get_node("../../Army")):
+		update_unitStatus(get_node("../../Army").get_child_count())
+
+func update_unitStatus(amount):
+	$statusUnit/unit_amount.text = str(amount)

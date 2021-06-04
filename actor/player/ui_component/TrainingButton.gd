@@ -18,7 +18,7 @@ func _ready():
 	_archer = _barrackLink.archer
 	_giant = _barrackLink.giant
 	
-	$PanelContainer/CenterContainer/train/cost.set_text(String(_soldier.getCost()))
+	$PanelContainer/CenterContainer/train/cost.set_text("$ " + String(_soldier.getCost()))
 	cur_unitCost = _soldier.getCost()
 	#$PanelContainer/CenterContainer/train.set_normal_texture("")
 	pass # Replace with function body.
@@ -51,15 +51,15 @@ func _on_changeUnit_button_up():
 	match cur_unitSelect:
 		#TODO: Set texture for button
 		0:
-			$PanelContainer/CenterContainer/train/cost.set_text(String(_soldier.getCost()))
+			$PanelContainer/CenterContainer/train/cost.set_text("$ " + String(_soldier.getCost()))
 			cur_unitCost = _soldier.getCost()
 			$PanelContainer/CenterContainer/train.set_normal_texture(load("res://assets/icon/soldier_icon.png"))
 		1:
-			$PanelContainer/CenterContainer/train/cost.set_text(String(_archer.getCost()))
+			$PanelContainer/CenterContainer/train/cost.set_text("$ " + String(_archer.getCost()))
 			cur_unitCost = _archer.getCost()
 			$PanelContainer/CenterContainer/train.set_normal_texture(load("res://assets/icon/archer_icon.png"))
 		2:
-			$PanelContainer/CenterContainer/train/cost.set_text(String(_giant.getCost()))
+			$PanelContainer/CenterContainer/train/cost.set_text("$ " + String(_giant.getCost()))
 			cur_unitCost = _giant.getCost()
 			$PanelContainer/CenterContainer/train.set_normal_texture(load("res://assets/icon/giant_icon.png"))
 	pass # Replace with function body.

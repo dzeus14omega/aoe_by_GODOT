@@ -1,6 +1,7 @@
 class_name Bullet extends Area2D
 
-var _speed = 2000
+var _speed = 1500
+
 #var _direction : Vector2 #motion -> normalized()
 var _dam : int
 var _life_time = 2.0

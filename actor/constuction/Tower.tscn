@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/construction/tower3.png" type="Texture" id=1]
 [ext_resource path="res://actor/constuction/Tower.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/construction/animation/flame_spritesheet.png" type="Texture" id=6]
 [ext_resource path="res://assets/sound_effect/construction/fireBurning.wav" type="AudioStream" id=7]
 [ext_resource path="res://actor/constuction/construction_assets/Flame_animation.tscn" type="PackedScene" id=8]
+[ext_resource path="res://actor/constuction/construction_assets/Smoke.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 550.0
@@ -307,5 +308,8 @@ visible = false
 position = Vector2( 16, -80.0002 )
 scale = Vector2( 3.09444, 3.09444 )
 frames = SubResource( 29 )
+
+[node name="Smoke" parent="fire_batch" instance=ExtResource( 9 )]
+visible = false
 
 [connection signal="timeout" from="ReloadTime" to="." method="_on_ReloadTime_timeout"]
