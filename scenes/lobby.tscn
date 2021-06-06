@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://client_server/lobby.gd" type="Script" id=1]
 [ext_resource path="res://font_style/Amatic-Bold.ttf" type="DynamicFontData" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://assets/icon/soldier_icon.png" type="Texture" id=9]
 [ext_resource path="res://assets/ui/btn_back.png" type="Texture" id=10]
 [ext_resource path="res://scenes/bg_castle.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/character/giant2.png" type="Texture" id=12]
+[ext_resource path="res://assets/character/giant3.png" type="Texture" id=13]
+[ext_resource path="res://assets/character/giant1.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -47,14 +50,22 @@ size = 40
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=10]
-size = 30
+size = 45
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "searching",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=12]
 size = 56
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorPane:rect_position")
@@ -211,6 +222,7 @@ __meta__ = {
 }
 
 [node name="IPLabel" type="Label" parent="Connect"]
+visible = false
 margin_left = 192.0
 margin_top = 170.667
 margin_right = 234.0
@@ -279,11 +291,11 @@ __meta__ = {
 margin_left = 283.0
 margin_top = 389.0
 margin_right = 646.0
-margin_bottom = 424.0
+margin_bottom = 456.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 10 )
-custom_colors/font_color = Color( 0.820312, 0.291595, 0.291595, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -302,6 +314,17 @@ texture_normal = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LoadingIcon" type="AnimatedSprite" parent="Connect"]
+visible = false
+position = Vector2( 464, 554.667 )
+frames = SubResource( 11 )
+animation = "searching"
+frame = 1
+
+[node name="Timer" type="Timer" parent="Connect"]
+wait_time = 5.0
+one_shot = true
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 margin_top = 24.0
@@ -475,20 +498,21 @@ margin_left = -66.0
 margin_top = -252.5
 margin_right = 76.0
 margin_bottom = -191.5
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 text = "Pick color"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/colorPane_in = SubResource( 12 )
+anims/colorPane_in = SubResource( 13 )
 
 [connection signal="released" from="Players/Start" to="." method="_on_start_released"]
 [connection signal="pressed" from="Players/Leave" to="." method="_on_Leave_pressed"]
 [connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Connect/BackMenu" to="." method="_on_BackMenu_pressed"]
+[connection signal="timeout" from="Connect/Timer" to="." method="_on_TimerConnect_timeout"]
 [connection signal="button_down" from="ColorPane/GridContainer/color1" to="." method="_on_color1_button_down"]
 [connection signal="button_down" from="ColorPane/GridContainer/color2" to="." method="_on_color2_button_down"]
 [connection signal="button_down" from="ColorPane/GridContainer/color3" to="." method="_on_color3_button_down"]

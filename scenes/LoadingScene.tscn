@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://font_style/Amatic-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/bg_castle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/LoadingScene.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "fadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="LoadingScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg_castle" parent="." instance=ExtResource( 2 )]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.004
+anchor_bottom = 1.015
+margin_right = 0.319824
+margin_bottom = -8.20007
+color = Color( 0, 0, 0, 0.545098 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
+margin_left = 504.0
+margin_top = 960.0
+margin_right = 1544.0
+margin_bottom = 1048.0
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fadeIn = SubResource( 3 )
+anims/fadeOut = SubResource( 2 )

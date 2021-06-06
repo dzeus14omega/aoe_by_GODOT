@@ -66,7 +66,8 @@ func _on_changeUnit_button_up():
 
 
 func _on_train_button_up():
-	if main_parent.spendGold_If_Possible(cur_unitCost):
-		_barrackLink.trainAmry(cur_unitSelect)
+	_barrackLink.trainAmry(cur_unitSelect)
+#	if main_parent.spendGold_If_Possible(cur_unitCost):
+#		_barrackLink.trainAmry(cur_unitSelect)
 	pass # Replace with function body.
 

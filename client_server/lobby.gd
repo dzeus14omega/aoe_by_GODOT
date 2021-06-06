@@ -85,8 +85,15 @@ func _on_join_pressed():
 	gameUtils.save_setting()
 	
 	gamestate.join_game(ip, player_name)
+	$Connect/Timer.start()
+	$Connect/LoadingIcon.visible = true
+	$Connect/LoadingIcon.play("searching")
 
 func _on_connection_success():
+	$Connect/Timer.stop()
+	$Connect/LoadingIcon.stop()
+	$Connect/LoadingIcon.visible = false
+	
 	gameUtils.playAudioLobby()
 	$Connect.hide()
 	$Players.show()
@@ -98,29 +105,35 @@ func _on_connection_success():
 		#print("is master")
 		$Players/Label.visible = false
 
-
 func _on_connection_failed():
+	$Connect/LoadingIcon.stop()
+	$Connect/LoadingIcon.visible = false
+	
 	$Connect/Host.visible = true
 	$Connect/Join.visible = true
 	$Connect/ErrorLabel.set_text("Connection failed.")
 
+
 func _on_game_ended():
 	gameUtils.playAudioMenu()
+	print("mark3")
 	get_tree().get_network_peer().close_connection(200)
+	print("mark4")
 	show()
 	$Connect.show()
 	$Players.hide()
 	$AnimationPlayer.play_backwards("colorPane_in")
 	$Connect/Host.visible = true
 	$Connect/Join.visible = true
+	print("mark5")
 
 
 func _on_game_error(errtxt):
-	$ErrorDialog.dialog_text = errtxt
-	$ErrorDialog.popup_centered_minsize()
+	$Connect/ErrorLabel.text = errtxt
+	#$ErrorDialog.dialog_text = errtxt
+	#$ErrorDialog.popup_centered_minsize()
 	$Connect/Host.visible = true
 	$Connect/Join.visible = true
-
 
 func refresh_lobby():
 	if get_tree().is_network_server():
@@ -176,6 +189,10 @@ func _on_Color_selected():
 func _on_BackMenu_pressed():
 	reset_colorPane()
 	get_tree().change_scene("res://scenes/mainMenu.tscn")
+	pass # Replace with function body.
+
+func _on_TimerConnect_timeout():
+	get_tree().emit_signal("connection_failed")
 	pass # Replace with function body.
 
 #===========================Button Control======================================
@@ -246,3 +263,5 @@ func _on_color11_button_down():
 	var colorString = $ColorPane/GridContainer/color11.modulate.to_html(false)
 	gamestate.onColorPaneChange("color11", colorString)
 	pass # Replace with function body.
+
+

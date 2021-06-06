@@ -154,6 +154,7 @@ config/icon="res://icon.png"
 
 gamestate="*res://client_server/gamestate.gd"
 gameUtils="*res://scenes/GameUtils.tscn"
+LoadingScene="*res://scenes/LoadingScene.tscn"
 
 [display]
 

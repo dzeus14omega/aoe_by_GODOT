@@ -18,7 +18,8 @@ func set_contruction(_construction):
 	pass
 
 func _process(delta):
-	if construction == null and $biome_animated.visible == false:
+	if !is_instance_valid(construction) and $biome_animated.visible == false:
 		$biome_animated.visible = true
+		construction = null
 	pass
 

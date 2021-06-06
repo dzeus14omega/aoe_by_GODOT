@@ -35,6 +35,8 @@ var _tmpPosBuilding := Vector2(0,0)
 var _curBuildType : int
 var _status : int = 0  #0: normal  1: building
 
+var refundGold = 0
+
 ## barrack manage var
 var MAX_BARRACKCOUNT = 7
 var cur_construction_id = 0
@@ -89,21 +91,20 @@ func _physics_process(_delta):
 	if (self._status == 1):
 		if (self.position != _tmpPosBuilding):
 			rpc("stopBuildingAnimate")
-			var returnGold = 0
-			match _curBuildType:
-				0:
-					returnGold = _goldmine._cost
-				1:
-					returnGold = _barrack._cost
-				2:
-					returnGold = _tower._cost
-				3:
-					returnGold = _wall._cost
+#			var returnGold = 0
+#			match _curBuildType:
+#				0:
+#					returnGold = _goldmine._cost
+#				1:
+#					returnGold = _barrack._cost
+#				2:
+#					returnGold = _tower._cost
+#				3:
+#					returnGold = _wall._cost
 			
 			#roll back gold refefund for total gold
-			self._total_gold -= returnGold
+			gain_refundGold()
 			
-			gain_gold(returnGold)
 			$buildProgress.visible = false
 			$BuildingTimer.stop()
 			self._status = 0
@@ -257,6 +258,8 @@ sync func setup_Construction(pos, rot, type, peerID, constructID):
 
 func buildConstruction(type : int):  #0: gold mine, 1: barrack, 2: tower, 3: wall
 	if is_network_master():
+		if (_status == 1):
+			gain_refundGold()
 		
 		_curBuildType = type
 		if type == 3:
@@ -399,12 +402,14 @@ func gain_gold(amountOfGold):
 	self._current_gold += amountOfGold
 	self._total_gold += amountOfGold
 	$UI/statusGold/gold_amount.set_text(String(checkGoldLeft()))
+	
 	pass
 
 func spendGold_If_Possible(amountOfGold):
 	if self._current_gold - amountOfGold >= 0:
 		_current_gold -= amountOfGold
 		$UI/statusGold/gold_amount.set_text(String(checkGoldLeft()))
+		refundGold = amountOfGold
 		return true
 	else:
 		return false
@@ -414,3 +419,8 @@ func checkGoldLeft():
 
 func add_total_armyUnit():
 	_total_armyUnit += 1
+
+func gain_refundGold():
+	self._total_gold -= refundGold
+	gain_gold(refundGold)
+	refundGold = 0 

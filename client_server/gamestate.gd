@@ -29,6 +29,7 @@ signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
 signal player_colorPane_changed()
+signal loadResourceSuceeded()
 
 # Callback from SceneTree.
 func _player_connected(id):
@@ -38,16 +39,29 @@ func _player_connected(id):
 
 # Callback from SceneTree.
 func _player_disconnected(id):
+	print("player disconnect" + str(id))
 	if has_node("/root/World/kingdoms"): # Game is in progress.
-		if get_tree().get_root().get_node("World/kingdoms").get_node(str(id)).has_node("king"):
-			if get_tree().is_network_server():
-				emit_signal("game_error", "Player " + str(id) + " disconnected")
-				end_game()
+		if !get_tree().get_root().get_node("World/kingdoms").has_node(str(id)):
+			#player join when game has started
+			unregister_player(id)
+		elif get_tree().get_root().get_node("World/kingdoms").get_node(str(id)).has_node("king"):
+			#player disconnect while playing
+			get_tree().get_root().get_node("World/kingdoms").get_node(str(id)).queue_free()
+#			if get_tree().is_network_server():
+#				forceEndGame(id)
+#			else:
+#				rpc_id(1, "forceEndGame", id)
 		else:
 			get_tree().get_root().get_node("World/kingdoms").get_node(str(id)).queue_free()
 	else: # Game is not in progress
 		# Unregister this player.
 		unregister_player(id)
+
+remote func forceEndGame(id):
+	unregister_player(id)
+	emit_signal("game_error", "Player " + str(id) + " disconnected")
+	end_game()
+	pass
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_ok():
@@ -64,6 +78,7 @@ func _server_disconnected():
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail():
 	get_tree().set_network_peer(null) # Remove peer
+	print("connect fail")
 	emit_signal("connection_failed")
 
 # Lobby management functions.
@@ -97,14 +112,25 @@ func onColorPaneChange(colorId, colorString):
 	pass
 
 remote func pre_start_game(spawn_points):
+	#LoadScene
+#	var listSceneToLoad = {
+#		"world": "res://scenes/world.tscn",
+#		"player_scene": "res://actor/Kingdom.tscn"
+#	}
+	
+	#var loadedScenes = LoadingScene.load_scene(listSceneToLoad)
+	#yield(self, "loadResourceSuceeded")
+
 	# Change scene.
 	var world = load("res://scenes/world.tscn").instance()
+	#var world = loadedScenes.get("world")
 	get_tree().get_root().add_child(world)
 
 	get_tree().get_root().get_node("Lobby").hide()
 
 	var player_scene = load("res://actor/Kingdom.tscn")
-
+	#var player_scene = loadedScenes.get("player_scene")
+	
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
@@ -159,6 +185,7 @@ func join_game(ip, new_player_name):
 	var client = NetworkedMultiplayerENet.new()
 	client.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(client)
+	
 
 func get_player_list():
 	return players.values()
@@ -186,8 +213,9 @@ func begin_game():
 func end_game():
 	if has_node("/root/World"): # Game is in progress.
 		# End it
+		print("mark1")
 		get_node("/root/World").queue_free()
-
+	print("mark2")
 	emit_signal("game_ended")
 	players.clear()
 

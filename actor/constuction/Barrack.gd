@@ -45,25 +45,31 @@ func _ready():
 func trainAmry(unitID : int):
 	if listTraining.size() <= maxTrainAmount - 1:
 		var new_unit
+		var cur_unitCost
 		if unitID == 0:
 			new_unit = soldier
+			cur_unitCost = soldier._cost
 		if unitID == 1:
 			new_unit = archer
+			cur_unitCost = archer._cost
 		if unitID == 2:
 			new_unit = giant
-		listTraining.append(unitID)
+			cur_unitCost = giant._cost
 		
-		if listTraining.size() == 1:
-			#curUnitType = unit
-			$Timer.wait_time = new_unit.getTrainTime()
-			_on_timeTrainingUpdate($Timer.wait_time)
-			$trainingProgress.visible = true
-			$Timer.start()
-		if listTraining.size() > 1:
-			var new_waitTime = $Timer.time_left + new_unit.getTrainTime()
-			_on_timeTrainingUpdate(new_waitTime)
-			$Timer.start(new_waitTime)
-		pass
+		if _mKing.spendGold_If_Possible(cur_unitCost):
+			listTraining.append(unitID)
+			
+			if listTraining.size() == 1:
+				#curUnitType = unit
+				$Timer.wait_time = new_unit.getTrainTime()
+				_on_timeTrainingUpdate($Timer.wait_time)
+				$trainingProgress.visible = true
+				$Timer.start()
+			if listTraining.size() > 1:
+				var new_waitTime = $Timer.time_left + new_unit.getTrainTime()
+				_on_timeTrainingUpdate(new_waitTime)
+				$Timer.start(new_waitTime)
+			pass
 	pass
 
 func _on_total_time_trainingUpdate(time_left):

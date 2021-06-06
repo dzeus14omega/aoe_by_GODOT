@@ -120,14 +120,16 @@ __meta__ = {
 }
 
 [node name="Title" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -840.0
-margin_top = -680.0
+margin_top = -180.0
 margin_right = -200.0
-margin_bottom = -191.997
+margin_bottom = 308.003
 texture = ExtResource( 10 )
 expand = true
 __meta__ = {
