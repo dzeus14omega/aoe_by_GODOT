@@ -14,7 +14,7 @@ func init(mKing):
 	self._cost = 150
 	self._speed = 140
 	self._hp = 450
-	self._damage = 50
+	self._damage = 30
 
 # for init when create new
 func _init():
@@ -22,7 +22,7 @@ func _init():
 	self._cost = 150
 	self._speed = 140
 	self._hp = 450
-	self._damage = 50
+	self._damage = 30
 
 func _ready():
 	$healthBar.max_value = self._hp
@@ -55,13 +55,12 @@ func _process(delta):
 			_rotate_to_mainTarget()
 			if state_command == 0:
 				_move_to_main_Target()
-				$AnimatedSprite.visible = true
-				$sprite.visible = false
+				
 				
 				pass
 			if state_command == 1:
 				#move to King and keep distance around King
-				
+				move_to_King()
 				pass
 			rset("puppet_rotation", $direction.rotation)
 			rset("puppet_pos", self.global_position)
@@ -94,7 +93,37 @@ func _rotate_to_mainTarget():
 
 func _move_to_main_Target():
 	if is_instance_valid(main_target):
-		move_and_slide(self._direction * _speed)
+		var real_motion = move_and_slide(self._direction * _speed)
+		playMovementAnimation(real_motion)
+	pass
+
+func playMovementAnimation(real_motion):
+	if real_motion != Vector2(0,0):
+		$AnimatedSprite.visible = true
+		$sprite.visible = false
+	else:
+		$AnimatedSprite.visible = false
+		$sprite.visible = true
+
+func move_to_King():
+	#print(_ownKing.global_position)
+	
+	var motion = Vector2(_ownKing.global_position.x - self.global_position.x, _ownKing.global_position.y - self.global_position.y)
+	motion = motion.normalized()
+	self._direction = motion
+	
+	var disToKing = self.global_position.distance_to(_ownKing.global_position)
+	if disToKing > 250:
+		$direction.look_at(- _ownKing.global_position)
+		var real_motion = move_and_slide(self._direction * _speed)
+		playMovementAnimation(real_motion)
+		#playMovementAnimation(_direction)
+	elif disToKing < 150 :
+		var real_motion = move_and_slide(-self._direction * _speed)
+		playMovementAnimation(real_motion)
+		#playMovementAnimation(_direction)
+	else:
+		playMovementAnimation(Vector2(0,0))
 	pass
 
 func _find_closestEnemy():

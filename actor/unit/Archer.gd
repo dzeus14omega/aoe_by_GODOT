@@ -8,7 +8,7 @@ var _arrowID = 0
 #puppet control
 puppet var puppet_pos = Vector2()
 puppet var puppet_rotation = 0
-
+puppet var puppet_direction = Vector2()
 
 func init(mKing):
 	.init(mKing)
@@ -72,9 +72,11 @@ func _process(delta):
 				pass
 			rset("puppet_rotation", $direction.rotation)
 			rset("puppet_pos", self.global_position)
+			rset("puppet_direction", _direction)
 	else:
 		$direction.rotation = puppet_rotation
-		playMovementAnimation(puppet_pos - self.position)
+		#playMovementAnimation(puppet_pos - self.position)
+		playMovementAnimation(puppet_direction)
 		self.position = puppet_pos
 		
 	
@@ -120,7 +122,8 @@ func move_to_King():
 		move_and_slide(-self._direction * _speed)
 		playMovementAnimation(_direction)
 	else:
-		playMovementAnimation(Vector2(0,0))
+		_direction = Vector2(0,0)
+		playMovementAnimation(_direction)
 		if targetInRange != null:
 			if not $direction/bow/shoot.is_playing():
 				rpc("attack", self._direction, self.get_network_master(), _arrowID)

@@ -8,6 +8,7 @@ var _direction : Vector2
 #puppet control
 puppet var puppet_pos = Vector2()
 puppet var puppet_rotation = 0
+puppet var puppet_direction = Vector2()
 
 func _init():
 	self._trainTime = 3
@@ -33,7 +34,6 @@ func _ready():
 sync func attack(random_number):
 	$direction/shortSword.attack(random_number)
 	pass
-
 
 func _process(delta):
 	.checkAlive()
@@ -67,9 +67,11 @@ func _process(delta):
 				pass
 			rset("puppet_rotation", $direction.rotation)
 			rset("puppet_pos", self.global_position)
+			rset("puppet_direction", _direction)
 	else:
 		$direction.rotation = puppet_rotation
-		playMovementAnimation(puppet_pos - self.position)
+		#playMovementAnimation(puppet_pos - self.position)
+		playMovementAnimation(puppet_direction)
 		self.position = puppet_pos
 	
 	
@@ -127,7 +129,9 @@ func move_to_King():
 		move_and_slide(-self._direction * _speed)
 		playMovementAnimation(_direction)
 	else:
-		playMovementAnimation(Vector2(0,0))
+		_direction = Vector2(0,0)
+		playMovementAnimation(_direction)
+		
 	pass
 
 func _rotate_to_mainTarget():
